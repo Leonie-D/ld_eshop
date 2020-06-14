@@ -43,7 +43,8 @@ Route::group(['middleware' => ['language']], function() {
 
     // accès nécissitant authentification (finalisation commande, modification profil, accès backoffice)
     Route::group(['middleware' => ['auth']], function() {
-        
+        // ATTENTION : certaines méthodes accessibles uniquement pour admin
+        Route::resource('/user', 'UserController')->except(['create']);
 
     });
     Auth::routes();

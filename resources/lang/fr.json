@@ -22,5 +22,15 @@
     "Trousers" : "Pantalons",
     "Short sleeves T-shirts" : "T-shirts à manches courtes",
     "Longue sleeves T-shirts" : "T-shirts à manches longues",
-    "Sweats & pullovers" : "Sweats & pulls"
+    "Sweats & pullovers" : "Sweats & pulls",
+    "Personal space" : "Mon compte",
+    "Personnal information" : "Informations personnelles",
+    "Lastname" : "Nom",
+    "Firstname" : "Prénom",
+    "Address(es)" : "Adresse(s)",
+    "Orders" : "Commandes",
+    "Edit profil" : "Modifier mes informations",
+    "Contact us" : "Nous contacter",
+    "Services" : "Services",
+    "No registered address" : "aucune adresse enregistrée"
 }
