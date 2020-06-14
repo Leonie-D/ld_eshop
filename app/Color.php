@@ -11,7 +11,7 @@ class Color extends Model
     public $timestamps = false;
     
     public function products() {
-        return $this->hasMany('App\Product');
+        return $this->belongsToMany('App\Product');
     }
 
     public function orders() {

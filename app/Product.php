@@ -15,8 +15,8 @@ class Product extends Model
         return $this->belongsTo('App\Category');
     }
 
-    public function color() {
-        return $this->belongsTo('App\Color');
+    public function colors() {
+        return $this->belongsToMany('App\Color');
     }
 
     public function deal() {
