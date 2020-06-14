@@ -2,10 +2,11 @@
 
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
 
-use App\User;
+use App\Address_user;
 use Faker\Generator as Faker;
 use Illuminate\Support\Str;
 use App\Address;
+use App\User;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,16 +19,13 @@ use App\Address;
 |
 */
 
-$factory->define(User::class, function (Faker $faker) {
-    $addresses = App\Address::pluck('id')->toArray(); // récupère tous les id de la table adresses
+$factory->define(Address_user::class, function (Faker $faker) {
+    $addresses = App\Address::pluck('id')->toArray(); // récupère tous les id de la table addresses
+    $users = App\User::pluck('id')->toArray(); // récupère tous les id de la table users
 
     return [
-        'name' => $faker->surname,
-        'firstname' => $faker->firstname,
-        'email' => $faker->unique()->safeEmail,
-        'email_verified_at' => now(),
-        'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
-        'address_id' => $faker->randomElement($addresses),
-        'remember_token' => Str::random(10),
+        'address_id' => $faker->randomElement($adresses),
+        'user_id' => $faker->randomElement($users),
+        'name' => $faker->word->optional(),
     ];
 });

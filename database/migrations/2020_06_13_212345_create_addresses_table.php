@@ -20,6 +20,7 @@ class CreateAddressesTable extends Migration
             $table->string('road_name', 45);
             $table->string('postal_code', 8);
             $table->string('city', 45);
+            $table->timestamps();
         });
     }
 

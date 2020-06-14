@@ -8,6 +8,8 @@ use App\Order;
 
 class Taxe extends Model
 {
+    public $timestamps = false;
+    
     public function products() {
         return $this->hasMany('App\Product');
     }
