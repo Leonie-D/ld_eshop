@@ -19,15 +19,13 @@ use App\Address;
 */
 
 $factory->define(User::class, function (Faker $faker) {
-    $addresses = App\Address::pluck('id')->toArray(); // récupère tous les id de la table adresses
 
     return [
-        'name' => $faker->surname,
+        'name' => $faker->lastname,
         'firstname' => $faker->firstname,
         'email' => $faker->unique()->safeEmail,
         'email_verified_at' => now(),
         'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
-        'address_id' => $faker->randomElement($addresses),
         'remember_token' => Str::random(10),
     ];
 });

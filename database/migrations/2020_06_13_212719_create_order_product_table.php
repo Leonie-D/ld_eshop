@@ -19,7 +19,7 @@ class CreateOrderProductTable extends Migration
             $table->unsignedBigInteger('color_id');
             $table->smallInteger('quantity');
             $table->decimal('product_price', 4,2);
-            $table->unsignedBigInteger('taxe_id');
+            $table->unsignedBigInteger('tax_id');
             $table->unsignedBigInteger('deal_id');
         });
     }

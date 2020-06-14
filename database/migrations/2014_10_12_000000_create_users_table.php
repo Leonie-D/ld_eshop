@@ -20,7 +20,6 @@ class CreateUsersTable extends Migration
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
-            $table->unsignedBigInteger('address_id')->nullable();
             $table->boolean('admin')->default(false);
             $table->boolean('chefRayon')->default(false);
             $table->rememberToken(); // sécurise les formulaires

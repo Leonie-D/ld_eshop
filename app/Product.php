@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use App\Category;
 use App\Color;
 use App\Deal;
-use App\Taxe;
+use App\Tax;
 use App\Order;
 
 class Product extends Model
@@ -23,8 +23,8 @@ class Product extends Model
         return $this->belongsTo('App\Deal');
     }
 
-    public function taxe() {
-        return $this->belongsTo('App\Taxe');
+    public function tax() {
+        return $this->belongsTo('App\Tax');
     }
 
     public function orders() {

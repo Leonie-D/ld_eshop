@@ -24,8 +24,8 @@ $factory->define(Address_user::class, function (Faker $faker) {
     $users = App\User::pluck('id')->toArray(); // récupère tous les id de la table users
 
     return [
-        'address_id' => $faker->randomElement($adresses),
+        'address_id' => $faker->randomElement($addresses),
         'user_id' => $faker->randomElement($users),
-        'name' => $faker->word->optional(),
+        'name' => $faker->word,
     ];
 });

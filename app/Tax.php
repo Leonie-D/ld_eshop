@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use App\Product;
 use App\Order;
 
-class Taxe extends Model
+class Tax extends Model
 {
     public $timestamps = false;
     

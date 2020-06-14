@@ -7,7 +7,7 @@ use Faker\Generator as Faker;
 use Illuminate\Support\Str;
 use App\Color;
 use App\Category;
-use App\Taxe;
+use App\Tax;
 use App\Deal;
 
 /*
@@ -24,16 +24,15 @@ use App\Deal;
 $factory->define(Product::class, function (Faker $faker) {
     $colors = App\Color::pluck('id')->toArray(); // récupère tous les id de la table colors
     $categories = App\Category::pluck('id')->toArray(); // récupère tous les id de la table categories
-    $taxes = App\Taxe::pluck('id')->toArray();
-    $deals = App\Deal::pluck('id')-toArray();
+    $taxes = App\Tax::pluck('id')->toArray();
+    $deals = App\Deal::pluck('id')->toArray();
 
 
     return [
         'name' => $faker->word,
         'description' => $faker->sentences($nb = 3, $asText = true),
         'price' => $faker->randomFloat($nbMaxDecimals = 2, $min = 5, $max = 100),
-        'taxe_id' => $faker->randomElement($taxes),
-        'deal_id' => $faker->randomElement($deals),
+        'tax_id' => $faker->randomElement($taxes),
         'category_id' => $faker->randomElement($categories),
     ];
 });
