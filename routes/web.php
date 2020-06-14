@@ -35,6 +35,9 @@ Route::group(['middleware' => ['language']], function() {
     // accueil
     Route::get('/', 'WelcomeController@index')->name('home');
 
+    // routes liés aux catégories // ATTENTION : certaines méthodes accessibles uniquement pour admin et/ou chef de rayon
+    Route::resource('/product', 'ProductController');
+
     // accès nécissitant authentification (finalisation commande, modification profil, accès backoffice)
     Route::group(['middleware' => ['auth']], function() {
         
