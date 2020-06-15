@@ -41,6 +41,14 @@ Route::group(['middleware' => ['language']], function() {
     // routes liés aux catégories // ATTENTION : certaines méthodes accessibles uniquement pour admin et/ou chef de rayon
     Route::resource('/category', 'CategoryController');
 
+    // routes liées au panier
+    Route::prefix('panier')->group(function(){
+        Route::get('', 'PanierController@index')->name('panier.index');
+        Route::get('/add/{product}/{color}', 'PanierController@add')->name('panier.add');
+        Route::get('/remove/{product}/{color}', 'PanierController@remove')->name('panier.remove');
+        Route::get('/update/{product}/{color}/{method}', 'PanierController@update')->name('panier.update');
+    });
+
     // accès nécissitant authentification (finalisation commande, modification profil, accès backoffice)
     Route::group(['middleware' => ['auth']], function() {
         // ATTENTION : certaines méthodes accessibles uniquement pour admin
