@@ -29,7 +29,10 @@ class RegisterController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = RouteServiceProvider::HOME;
+    // protected $redirectTo = RouteServiceProvider::HOME;
+    protected function redirectTo() {
+        return session()->get('url.intended');
+    }
 
     /**
      * Create a new controller instance.
@@ -51,6 +54,7 @@ class RegisterController extends Controller
     {
         return Validator::make($data, [
             'name' => ['required', 'string', 'max:255'],
+            'firstname' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
         ]);
@@ -63,11 +67,26 @@ class RegisterController extends Controller
      * @return \App\User
      */
     protected function create(array $data)
-    {
+    {   
         return User::create([
             'name' => $data['name'],
+            'firstname' => $data['firstname'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
         ]);
+    }
+
+    public function showRegistrationForm()
+    {
+        // Get URLs
+        $urlPrevious = url()->previous();
+        $urlBase = url()->to('/');
+
+        // Set the previous url that we came from to redirect to after successful registration but only if is internal
+        if(($urlPrevious != $urlBase . '/register') && (substr($urlPrevious, 0, strlen($urlBase)) === $urlBase)) {
+            session()->put('url.intended', $urlPrevious);
+        }
+
+        return view('auth.register');
     }
 }

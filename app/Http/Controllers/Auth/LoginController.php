@@ -26,7 +26,7 @@ class LoginController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = RouteServiceProvider::HOME;
+    // protected $redirectTo = RouteServiceProvider::HOME;
 
     /**
      * Create a new controller instance.
@@ -36,5 +36,19 @@ class LoginController extends Controller
     public function __construct()
     {
         $this->middleware('guest')->except('logout');
+    }
+
+    public function showLoginForm()
+    {
+        // Get URLs
+        $urlPrevious = url()->previous();
+        $urlBase = url()->to('/');
+
+        // Set the previous url that we came from to redirect to after successful login but only if is internal
+        if(($urlPrevious != $urlBase . '/login') && (substr($urlPrevious, 0, strlen($urlBase)) === $urlBase)) {
+            session()->put('url.intended', $urlPrevious);
+        }
+
+        return view('auth.login');
     }
 }
