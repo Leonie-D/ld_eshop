@@ -31,8 +31,8 @@
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
                         <!-- Left Side Of Navbar -->
                         <ul class="navbar-nav mr-auto">
-                            @if (isset($mPanier) && $mPanier->count()>0)
-                                <a href='{{route('panier.index')}}'>Panier ({{$mPanier->count()}})</a>
+                            @if ($cartTotalQuantity > 0)
+                                <a href='{{route('panier.index')}}'>Panier ({{$cartTotalQuantity}})</a>
                             @endif
                         </ul>
 
@@ -107,8 +107,12 @@
             </nav>
         </header>
 
-        <main class="py-4 flex-grow-1">
+        <main class="py-4 flex-grow-1" style="position: relative;">
             @yield('content')
+
+            @if(Session::has('message'))
+                @include('includes.toast')
+            @endif
         </main>
 
         <footer>
@@ -118,12 +122,12 @@
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}"></script>
-    <script src="{{ asset('js/addToChart.js') }}"></script>
 
     @if(Session::has('message'))
-        @include('includes.toast')
         <script>
-            $('.toast').toast('show');
+            $(document).ready(function(){
+                $('.toast').toast('show');
+            });
         </script>
     @endif
 

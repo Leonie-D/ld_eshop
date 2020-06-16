@@ -38,7 +38,7 @@
                             @endif
                         </td>
                         <td>
-                            {{number_format(Round($product->quantity*$product->price * (1 + $product->associatedModel->tax->value),2),2)}} €
+                            {{number_format(Round($product->getPriceSum() * (1 + $product->associatedModel->tax->value),2),2)}} €
                         </td>
                         <td><a href="{{ route('panier.remove', ['productId' => $product->id]) }}">X</a></td>
                     </tr>
@@ -61,6 +61,10 @@
                 </tr>
                 </tbody>
             </table>
+        </div>
+
+        <div class="row">
+            <a class="btn btn-primary" href="{{ route('panier.confirm') }}">{{__('Confirm order')}}</a>
         </div>
 
 @endisset
