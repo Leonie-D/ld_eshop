@@ -33,7 +33,7 @@ class PanierController extends Controller
         }
     }
 
-    public function add(Product $product, Color $color){
+    public function add(Request $request, Product $product, Color $color){
 
         // récupérer la 'place' du dernier article ajouté pour l'incrémenter pour l'ajout en cours
         // permet de fixer l'ordre des produits à l'affichage du panier
