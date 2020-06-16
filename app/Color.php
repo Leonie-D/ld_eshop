@@ -11,7 +11,7 @@ class Color extends Model
     public $timestamps = false;
     
     public function products() {
-        return $this->belongsToMany('App\Product');
+        return $this->belongsToMany('App\Product')->withPivot('stock');
     }
 
     public function orders() {
