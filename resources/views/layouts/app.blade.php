@@ -31,11 +31,36 @@
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
                         <!-- Left Side Of Navbar -->
                         <ul class="navbar-nav mr-auto">
-                            
+                            @if (isset($mPanier) && $mPanier->count()>0)
+                                <a href='{{route('panier.index')}}'>Panier ({{$mPanier->count()}})</a>
+                            @endif
                         </ul>
 
                         <!-- Right Side Of Navbar -->
                         <ul class="navbar-nav ml-auto">
+                            <!-- Site navigation -->
+                            <li class="mr-2">
+                                <a class="btn btn-secondary" href="{{ route('product.index') }}">
+                                    {{ __('New collection') }}
+                                </a>
+                            </li>
+                            <li class="dropdown show">
+                                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    {{ __('Categories') }}
+                                </button>
+                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenu">
+                                    <a class="dropdown-item" href=" {{ route('category.index') }}"> 
+                                        {{ __('All the categories') }}
+                                    </a>
+                                    <div class="dropdown-divider"></div>
+                                    @foreach($mCategories as $mCategory)
+                                        <a class="dropdown-item" href=" {{ route('category.show', ['category' => $mCategory]) }}"> 
+                                            {{ __($mCategory->name) }}
+                                        </a>
+                                    @endforeach
+                                </div>
+                            </li>
+
                             <!-- Authentication Links -->
                             @guest
                                 <li class="nav-item">
@@ -94,5 +119,13 @@
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}"></script>
     <script src="{{ asset('js/addToChart.js') }}"></script>
+
+    @if(Session::has('message'))
+        @include('includes.toast')
+        <script>
+            $('.toast').toast('show');
+        </script>
+    @endif
+
 </body>
 </html>

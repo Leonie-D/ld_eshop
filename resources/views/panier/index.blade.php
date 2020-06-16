@@ -2,8 +2,9 @@
 
 @section('content')
 <div class="container">
-@isset($panier)    
-        <div class="panier">
+@isset($panier)  
+
+        <div class="panier text-center">
             <table class="table">
                 <thead>
                     <tr>
@@ -18,26 +19,28 @@
                     </tr>
                 </thead>
                 <tbody>
-                @foreach($panier as $product)    
+                @foreach($panier as $product)  
                     <tr>
-                    <td>{{$product->name}}</td>
-                    <td>{{$product->attributes['color']->name}}</td>
-                    <td>{{number_format(Round($product->price,2),2)}}</td>
-                    <td>
-                        @if($product->quantity > 1)
-                            <a href="">-</a>
-                        @else
-                            <a></a>
-                        @endif
-                    </td>
-                    <td>{{$product->quantity}}</td>
-                    <td>
-                        @if($product->quantity < $product->associatedModel->quantity)
-                            <a href="">+</a>
-                        @endif
-                    </td>
-                    <td>{{number_format(Round($product->quantity*$product->price,2),2)}}</td>
-                    <td><a href="">X</a></td>
+                        <td>{{$product->name}}</td>
+                        <td>{{__($product->attributes['color']->name)}}</td>
+                        <td>{{ number_format(round($product->price * (1 + $product->associatedModel->tax->value), 2),2) }} €</td>
+                        <td>
+                            @if($product->quantity > 1)
+                                <a href="{{ route('panier.update', ['productId' => $product->id, 'method' => '-']) }}">-</a>
+                            @else
+                                <a></a>
+                            @endif
+                        </td>
+                        <td>{{$product->quantity}}</td>
+                        <td>
+                            @if($product->quantity < 10)
+                                <a href="{{ route('panier.update', ['productId' => $product->id, 'method' => '+']) }}">+</a>
+                            @endif
+                        </td>
+                        <td>
+                            {{number_format(Round($product->quantity*$product->price * (1 + $product->associatedModel->tax->value),2),2)}} €
+                        </td>
+                        <td><a href="{{ route('panier.remove', ['productId' => $product->id]) }}">X</a></td>
                     </tr>
                 @endforeach  
                 <tr>
@@ -45,6 +48,7 @@
                 </tr>
                 <tr>
                     <td colspan="7" class="text-right">{{__('Total excluding tax')}}</td>
+                    {{-- Je ne suis pas parvenue à affecter la condition par item au total uniquement... --}}
                     <td colspan="1">{{number_format(Round(\Cart::getSubTotal(),2),2)}} €</td>
                 </tr>
                 <tr>

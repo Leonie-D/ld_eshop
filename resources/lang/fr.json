@@ -48,5 +48,7 @@
     "Delete" : "Supprimer",
     "Total excluding tax" : "Total HT",
     "Total including tax" : "Total TTC",
-    "Tax" : "TVA"
+    "Tax" : "TVA",
+    "Categories" : "Les rayons",
+    "Selected product has been added to your cart" : "Votre sélection a bien été ajoutée au panier",
 }
