@@ -33,8 +33,8 @@ class PanierController extends Controller
         }
     }
 
-    public function add(Product $product, Color $color){
-
+    public function add(Request $request, Product $product, Color $color){
+        
         // récupérer la 'place' du dernier article ajouté pour l'incrémenter pour l'ajout en cours
         // permet de fixer l'ordre des produits à l'affichage du panier
         $panier = \Cart::getContent();
@@ -66,27 +66,55 @@ class PanierController extends Controller
         ]);
 
         // afficher message précisant que le produit a été mis au panier et rester sur cette page
-        $request->session()->flash('message', 'Votre produit a bien été ajouté au panier');
+        $request->session()->flash('title', 'Good news');
+        $request->session()->flash('message', 'Selected product has been added to your cart');
         return redirect()->back();
     }
 
     public function remove($productId){
-        \Cart::remove($productId);
+        if(\Cart::getContent()->count() > 0) { // on ne peut utiliser cette méthode que sur un panier existant
 
-        return redirect()->route('panier.index');
+            // un try and catch ici serait bien pour le cas ou le productId n'est pas dans le panier...
+            \Cart::remove($productId);
+            return redirect()->route('panier.index');
+
+        } else {
+
+            return redirect()->back();
+
+        }
     }
 
     public function update($productId, string $method){
-        if($method === '-'){
-            $quantity = -1;
-        } elseif($method === '+') {
-            $quantity = +1;
+
+        if(\Cart::getContent()->count() > 0) { // on ne peut utiliser cette méthode que sur un panier existant
+
+            // un try and catch ici serait bien pour le cas ou le productId n'est pas dans le panier ou si une string autre que _ ou + est saisie
+            if($method === '-'){
+                $quantity = -1;
+            } elseif($method === '+') {
+                $quantity = +1;
+            } 
+
+            \Cart::update($productId, array(
+                'quantity' => $quantity,
+            ));
+
+            return redirect()->route('panier.index');
+
+        } else {
+
+            return redirect()->back();
+
         }
 
-        \Cart::update($productId, array(
-            'quantity' => $quantity,
-        ));
+    }
 
-        return redirect()->route('panier.index');
+    public function confirm(Request $request){
+        if(\Cart::getContent()->count() > 0) {
+            return view('panier.confirm', ['delivery' => $request->delivery]);
+        } else {
+            return redirect()->back();
+        }
     }
 }

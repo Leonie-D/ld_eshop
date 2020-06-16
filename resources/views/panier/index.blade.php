@@ -1,5 +1,7 @@
 @extends('layouts.app')
 
+@section('title') {{__('Cart')}} @endsection
+
 @section('content')
 <div class="container">
 @isset($panier)  
@@ -63,9 +65,29 @@
             </table>
         </div>
 
-        <div class="row">
-            <a class="btn btn-primary" href="{{ route('panier.confirm') }}">{{__('Confirm order')}}</a>
-        </div>
+        <form class="row d-flex justify-content-between align-items-center" method="POST" action="{{route('panier.confirm') }}">
+            @csrf
+
+            <div class="form-group">
+                <h4>{{__('Select delivery option')}}</h4>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="delivery" id="home-delivered" value="home" checked>
+                    <label class="form-check-label" for="home-delivery">
+                        {{__('Home delivery')}}
+                    </label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="delivery" id="shop-delivered" value="shop">
+                    <label class="form-check-label" for="shop-delivery">
+                        {{__('Shop pick up')}}
+                    </label>
+                </div>
+            </div>
+
+            <button type="submit" class="btn btn-primary">
+                {{__('Confirm order')}}
+            </button>
+        </form>
 
 @endisset
 </div>

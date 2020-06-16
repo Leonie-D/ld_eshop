@@ -47,6 +47,7 @@ Route::group(['middleware' => ['language']], function() {
         Route::get('/add/{product}/{color}', 'PanierController@add')->name('panier.add');
         Route::get('/remove/{productId}', 'PanierController@remove')->name('panier.remove');
         Route::get('/update/{productId}/{method}', 'PanierController@update')->name('panier.update');
+        Route::post('/confirm', 'PanierController@confirm')->name('panier.confirm');
     });
 
     // accès nécissitant authentification (finalisation commande, modification profil, accès backoffice)

@@ -52,5 +52,10 @@
     "Categories" : "Les rayons",
     "Selected product has been added to your cart" : "Votre sélection a bien été ajoutée au panier",
     "Good news" : "Bonne nouvelle",
-    "Confirm order" : "Confirmer la commande"
+    "Confirm order" : "Confirmer la commande",
+    "Cart confirmation" : "Confirmation du panier",
+    "Cart" : "Panier",
+    "Select delivery option" : "Veuillez choisir un mode de livraison",
+    "Home delivery" : "Livraison à domicile",
+    "Shop pick up" : "Retrait en magasin"
 }
