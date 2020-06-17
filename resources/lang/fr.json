@@ -57,5 +57,9 @@
     "Cart" : "Panier",
     "Select delivery option" : "Veuillez choisir un mode de livraison",
     "Home delivery" : "Livraison à domicile",
-    "Shop pick up" : "Retrait en magasin"
+    "Shop pick up" : "Retrait en magasin",
+    "Please, login or register to proceed with your order" : "Veuillez vous connecter ou vous enregistrer pour finaliser la commande",
+    "Your order :" : "Détails de votre commande :",
+    "You already have an account : get logged in" : "Vous avez déjà un compte chez nous? Connectez-vous!",
+    "You do not have an account yet : please register" : "Vous n'avez pas encore de compte chez nous ? Inscrivez-vous!"
 }

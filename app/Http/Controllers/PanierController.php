@@ -111,8 +111,19 @@ class PanierController extends Controller
     }
 
     public function confirm(Request $request){
-        if(\Cart::getContent()->count() > 0) {
-            return view('panier.confirm', ['delivery' => $request->delivery]);
+        if(isset($request->delivery) && \Cart::getContent()->count() > 0) { // le panier n'est pas vide et le choix de la livraison a bien été fait
+
+            session()->put('delivery', $request->delivery); // pour y accéder facilement quel que soit le chemin emprunté par l'utilisateur entre le panier et le payement
+
+            // Set url for redirection after login or register
+            session()->put('url.intended', route('checkout'));
+
+            if(auth()->check()) { // deja authentifié, on passe à la suite
+                return redirect()->route('checkout');
+            } else { // pas encore authentifié, direction page dédiée à login ou register
+                return view('panier.confirm');
+            }
+
         } else {
             return redirect()->back();
         }
