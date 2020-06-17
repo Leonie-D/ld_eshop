@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Http\Request;
 
 class LoginController extends Controller
 {
@@ -46,7 +47,11 @@ class LoginController extends Controller
 
         // Set the previous url that we came from to redirect to after successful login but only if is internal
         if(($urlPrevious != $urlBase . '/login') && (substr($urlPrevious, 0, strlen($urlBase)) === $urlBase)) {
-            session()->put('url.intended', $urlPrevious);
+            if($urlPrevious = route('panier.confirm')) { // si confirmation de la commande, passer à l'étape suivante
+                session()->put('url.intended', route('checkout'));
+            } else {
+                session()->put('url.intended', $urlPrevious);
+            }
         }
 
         return view('auth.login');

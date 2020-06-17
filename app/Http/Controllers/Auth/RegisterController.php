@@ -8,6 +8,7 @@ use App\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Http\Request;
 
 class RegisterController extends Controller
 {
@@ -84,7 +85,11 @@ class RegisterController extends Controller
 
         // Set the previous url that we came from to redirect to after successful registration but only if is internal
         if(($urlPrevious != $urlBase . '/register') && (substr($urlPrevious, 0, strlen($urlBase)) === $urlBase)) {
-            session()->put('url.intended', $urlPrevious);
+            if($urlPrevious = route('panier.confirm')) { // si confirmation de la commande, passer à l'étape suivante
+                session()->put('url.intended', route('checkout'));
+            } else {
+                session()->put('url.intended', $urlPrevious);
+            }
         }
 
         return view('auth.register');
