@@ -55,7 +55,9 @@ Route::group(['middleware' => ['language']], function() {
         // ATTENTION : certaines méthodes accessibles uniquement pour admin
         Route::resource('/user', 'UserController')->except(['create']);
 
+        // payement
         Route::get('/chekout', 'CheckoutController@checkout')->name('checkout');
+        Route::post('/chekout/store', 'CheckoutController@store')->name('checkout.store');
     });
     Auth::routes();
 });

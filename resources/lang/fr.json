@@ -64,5 +64,7 @@
     "You do not have an account yet : please register" : "Vous n'avez pas encore de compte chez nous ? Inscrivez-vous!",
     "Delivery option" : "Mode de livraison",
     "Total articles number" : "Nombre total d'articles",
-    "Total including tax and delivery" : "Total TTC (livraison comprise)"
+    "Total including tax and delivery" : "Total TTC (livraison comprise)",
+    "Delivery address" : "Adresse de livraison",
+    "Pay with card" : "Payer par carte"
 }
