@@ -33,7 +33,8 @@
     "Firstname" : "Prénom",
     "Address(es)" : "Adresse(s)",
     "Orders" : "Commandes",
-    "Edit profil" : "Modifier mes informations",
+    "Edit" : "Modifier",
+    "Edit profil" : "Modifier mes informations personnelles",
     "Contact us" : "Nous contacter",
     "Services" : "Services",
     "No registered address" : "aucune adresse enregistrée",
@@ -70,5 +71,6 @@
     "Delivery address" : "Adresse de livraison",
     "Pay with card" : "Payer par carte",
     "New address" : "Nouvelle adresse",
-    "Address name" : "Nom de l'addresse"
+    "Address name" : "Nom de l'addresse",
+    "Shipping addresses" : "Adresses de livraison"
 }

@@ -57,7 +57,11 @@ class UserController extends Controller
      */
     public function edit(User $user)
     {
-        return view('users.edit', compact('user'));
+        if($user == auth()->user() || $user->admin) {
+            return view('users.edit', compact('user'));
+        } else {
+            return redirect()->back();
+        }
     }
 
     /**
@@ -69,7 +73,44 @@ class UserController extends Controller
      */
     public function update(Request $request, User $user)
     {
-        // 
+        if($user == auth()->user() || $user->admin) {
+
+            // idéalement dans un try and catch...
+            $user->name = $request->name;
+            $user->firstname = $request->firstname;
+            $user->email = $request->email;
+            if(isset($request->password)) {
+                $user->password = Hash::make($request->password);
+            }
+
+            $user->save();
+
+            if(isset($request->number) && isset($request->roadName) && isset($request->zip) && isset($request->city)) {
+                $address = new Address;
+                $address->number = $request->number;
+                $address->road_name = $request->roadName;
+                $address->postal_code = $request->zip;
+                $address->city = $request->city;
+
+                $address->save();
+
+                $address_user = new Address_user;
+                if(isset($request->addressName)){
+                    $address_user->name = $request->addressName;
+                }
+                $address_user->address_id = $address->id;
+                $address_user->user_id = $user->id;
+
+                $address_user->save();
+            }
+
+            $request->session()->flash('message', 'Votre profil a bien été mis à jour, '.$request->firstname);
+
+            return redirect()->route('user.show', compact('user'));
+        } else {
+            return redirect()->back();
+        }
+         
     }
 
     /**
@@ -80,6 +121,6 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        //
+        // admin seulement ?
     }
 }

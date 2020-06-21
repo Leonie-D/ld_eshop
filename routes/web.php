@@ -60,6 +60,9 @@ Route::group(['middleware' => ['language']], function() {
         Route::get('/chekout', 'CheckoutController@checkout')->name('checkout');
         Route::post('/chekout/store/{deliveryAddress?}', 'CheckoutController@store')->name('checkout.store');
         Route::post('/address/{user}', 'AddressController@select')->name('address.select');
+
+        // édition de profil
+        Route::resource('/address', 'AddressController')->except(['index, create, show']);
     });
     Auth::routes();
 });
