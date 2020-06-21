@@ -1,6 +1,8 @@
-{{-- image --}}
+@isset($product->colors[0])
+    <img src="{{asset(Storage::url('product-img/'.$product->colors[0]->pivot->picture.'.jpg'))}}" alt="">
+@endisset
 <p class="d-block w-100"> {{ $product->description }} </p>
-<p class="d-block w-100"> {{ number_format(round($product->price * (1 + $product->tax->value), 2),2) }}€</p>
+<p class="d-block w-100"> {{ number_format(round($product->priceTtc() ,2),2) }}€</p>
 
 @php
     $stockTotal = 0;

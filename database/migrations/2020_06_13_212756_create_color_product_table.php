@@ -16,6 +16,7 @@ class CreateColorProductTable extends Migration
         Schema::create('color_product', function (Blueprint $table) {
             $table->unsignedBigInteger('product_id');
             $table->unsignedBigInteger('color_id');
+            $table->string('picture', 125);
             $table->smallInteger('stock');
         });
     }

@@ -23,9 +23,13 @@ $factory->define(Color_product::class, function (Faker $faker) {
     $products = App\Product::pluck('id')->toArray(); // récupère tous les id de la table products
     $colors = App\Color::pluck('id')->toArray(); // récupère tous les id de la table colors
 
+    $product_id = $faker->randomElement($products);
+    $color_id = $faker->randomElement($colors);
+
     return [
-        'product_id' => $faker->randomElement($products),
-        'color_id' => $faker->randomElement($colors),
+        'product_id' => $product_id,
+        'color_id' => $color_id,
+        'picture' => $product_id.'-'.$color_id,
         'stock' => $faker->numberBetween($min = 0, $max = 50),
     ];
 });

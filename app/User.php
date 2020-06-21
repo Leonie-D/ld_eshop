@@ -40,7 +40,7 @@ class User extends Authenticatable
     ];
 
     public function addresses() {
-        return $this->belongsToMany('App\Address');
+        return $this->belongsToMany('App\Address')->withPivot('name');
     }
 
     public function orders() {

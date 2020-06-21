@@ -18,10 +18,7 @@ class CreateProductsTable extends Migration
             $table->string('name', 45);
             $table->text('description')->nullable();
             $table->decimal('price', 4, 2);
-            $table->unsignedBigInteger('tax_id');
-            $table->unsignedBigInteger('deal_id')->nullable();
             $table->unsignedBigInteger('category_id');
-            $table->string('picture', 125)->default('');
             $table->timestamps();
         });
     }

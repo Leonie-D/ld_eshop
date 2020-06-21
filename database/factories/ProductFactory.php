@@ -24,15 +24,11 @@ use App\Deal;
 $factory->define(Product::class, function (Faker $faker) {
     $colors = App\Color::pluck('id')->toArray(); // récupère tous les id de la table colors
     $categories = App\Category::pluck('id')->toArray(); // récupère tous les id de la table categories
-    $taxes = App\Tax::pluck('id')->toArray();
-    $deals = App\Deal::pluck('id')->toArray();
-
 
     return [
         'name' => $faker->word,
         'description' => $faker->sentences($nb = 3, $asText = true),
         'price' => $faker->randomFloat($nbMaxDecimals = 2, $min = 5, $max = 100),
-        'tax_id' => $faker->randomElement($taxes),
         'category_id' => $faker->randomElement($categories),
     ];
 });

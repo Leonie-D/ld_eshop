@@ -7,6 +7,7 @@ use App\User;
 use App\Product;
 use App\Color;
 use App\Step;
+use App\Address;
 
 class Order extends Model
 {
@@ -24,5 +25,9 @@ class Order extends Model
 
     public function colors() {
         return $this->belongsToMany('App\Color');
+    }
+
+    public function address() {
+        return $this->belongsTo('App\Address');
     }
 }

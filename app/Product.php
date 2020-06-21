@@ -16,18 +16,14 @@ class Product extends Model
     }
 
     public function colors() {
-        return $this->belongsToMany('App\Color')->withPivot('stock');
-    }
-
-    public function deal() {
-        return $this->belongsTo('App\Deal');
-    }
-
-    public function tax() {
-        return $this->belongsTo('App\Tax');
+        return $this->belongsToMany('App\Color')->withPivot('stock', 'picture');
     }
 
     public function orders() {
         return $this->belongsToMany('App\Order');
+    }
+
+    public function priceTtc() {
+        return $this->price * 1.2;
     }
 }

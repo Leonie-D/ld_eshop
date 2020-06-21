@@ -16,7 +16,6 @@ class CreateAddressesTable extends Migration
         Schema::create('addresses', function (Blueprint $table) {
             $table->id();
             $table->smallInteger('number');
-            $table->enum('road_type', ['rue', 'allée', 'boulevard', 'avenue']);
             $table->string('road_name', 45);
             $table->string('postal_code', 8);
             $table->string('city', 45);

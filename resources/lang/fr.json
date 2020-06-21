@@ -42,6 +42,7 @@
     "Available in" : "Disponible en",
     "Temporarily unavailable" : "Momentanément indisponible",
     "Color" : "Couleur",
+    "Picture" : "Photo",
     "Price" : "Prix",
     "Quantity" : "Quantité",
     "Total price" : "Prix total",
@@ -58,6 +59,7 @@
     "Select delivery option" : "Veuillez choisir un mode de livraison",
     "Home delivery" : "Livraison à domicile",
     "Shop pick up" : "Retrait en magasin",
+    "(free)" : "(gratuit)",
     "Please, login or register to proceed with your order" : "Veuillez vous connecter ou vous enregistrer pour finaliser la commande",
     "Your order" : "Détails de votre commande",
     "You already have an account : get logged in" : "Vous avez déjà un compte chez nous? Connectez-vous!",
@@ -66,5 +68,7 @@
     "Total articles number" : "Nombre total d'articles",
     "Total including tax and delivery" : "Total TTC (livraison comprise)",
     "Delivery address" : "Adresse de livraison",
-    "Pay with card" : "Payer par carte"
+    "Pay with card" : "Payer par carte",
+    "New address" : "Nouvelle adresse",
+    "Address name" : "Nom de l'addresse"
 }

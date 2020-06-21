@@ -6,7 +6,7 @@
 
 <div class="container">
     <div class="row justify-content-center text-center">
-        <h1 class="col-12">{{ $product->name }}</h1>
+        <h1 class="col-12 product-name">{{ $product->name }}</h1>
         @include('includes.product')
     </div>
     <div class="row justify-content-center text-center">

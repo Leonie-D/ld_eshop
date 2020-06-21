@@ -43,7 +43,7 @@
                 <div class="card">
                 <div class="card-header" id="headingOne">
                     <h5 class="mb-0">
-                    <button class="btn" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                    <button class="btn btn-link" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
                         {{__('You already have an account : get logged in')}}
                     </button>
                     </h5>
@@ -113,7 +113,7 @@
                 <div class="card">
                 <div class="card-header" id="headingTwo">
                     <h5 class="mb-0">
-                    <button class="btn collapsed" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                    <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
                         {{__('You do not have an account yet : please register')}}
                     </button>
                     </h5>

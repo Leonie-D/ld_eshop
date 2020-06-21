@@ -48,6 +48,7 @@ Route::group(['middleware' => ['language']], function() {
         Route::get('/remove/{productId}', 'PanierController@remove')->name('panier.remove');
         Route::get('/update/{productId}/{method}', 'PanierController@update')->name('panier.update');
         Route::post('/confirm', 'PanierController@confirm')->name('panier.confirm');
+        Route::get('/authenticate', 'PanierController@authenticate')->name('panier.authenticate');
     });
 
     // accès nécissitant authentification (finalisation commande, modification profil, accès backoffice)
@@ -57,7 +58,8 @@ Route::group(['middleware' => ['language']], function() {
 
         // payement
         Route::get('/chekout', 'CheckoutController@checkout')->name('checkout');
-        Route::post('/chekout/store', 'CheckoutController@store')->name('checkout.store');
+        Route::post('/chekout/store/{deliveryAddress?}', 'CheckoutController@store')->name('checkout.store');
+        Route::post('/address/{user}', 'AddressController@select')->name('address.select');
     });
     Auth::routes();
 });

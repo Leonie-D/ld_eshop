@@ -7,11 +7,19 @@
 // Bootstrap
 @import '~bootstrap/scss/bootstrap';
 
+.product-name {
+    text-transform: uppercase;
+}
+
+.cart-picture {
+    max-height: 50px;
+}
+
 .stripe-button-el {
     background-image: none !important;
     position: absolute !important;
     top: 50vh !important;
-    left: calc(50vw - 5rem) !important;
+    left: 20vw !important;
     min-height: auto !important;
     min-width: 10rem !important;
     padding: 0 !important;

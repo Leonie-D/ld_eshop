@@ -11,6 +11,15 @@ class PanierController extends Controller
     public function index(){
         $collection = \Cart::getContent();
 
+        // CONDITION TVA
+        $condition = new \Darryldecode\Cart\CartCondition(array(
+            'name' => 'TVA 20%',
+            'type' => 'tax',
+            'target' => 'total', // this condition will be applied to cart's total when getTotal() is called.
+            'value' => '20%',
+        ));
+        \Cart::condition($condition);
+
         if($collection->count()>0) {
 
             // fixer l'ordre des produits à l'affichage du panier
@@ -46,14 +55,6 @@ class PanierController extends Controller
         } else {
             $order = 1;
         }
-
-        // create condition instance
-        $tvaTax = new \Darryldecode\Cart\CartCondition(array(
-            'name' => $product->tax->name,
-            'type' => 'tax',
-            'value' => '+'.($product->tax->value * 100).'%',
-            'target' => 'total',
-        ));
         
         \Cart::add([
             'id' => $product->id.'-'.$color->id,
@@ -61,7 +62,6 @@ class PanierController extends Controller
             'price' => $product->price,
             'quantity' => 1,
             'attributes' => array('color' => $color, 'order' => $order),
-            'conditions' => $tvaTax,
             'associatedModel' => $product,
         ]);
 
@@ -121,11 +121,15 @@ class PanierController extends Controller
             if(auth()->check()) { // deja authentifié, on passe à la suite
                 return redirect()->route('checkout');
             } else { // pas encore authentifié, direction page dédiée à login ou register
-                return view('panier.confirm');
+                return redirect()->route('panier.authenticate');
             }
 
         } else {
             return redirect()->back();
         }
+    }
+
+    public function authenticate() {
+        return view('panier.authenticate');
     }
 }
