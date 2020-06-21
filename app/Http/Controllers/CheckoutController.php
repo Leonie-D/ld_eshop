@@ -9,6 +9,7 @@ use Stripe\Charge;
 use App\Order;
 use App\Order_product;
 use App\Address;
+use App\Mail\MailFromSite;
 use Storage;
 
 class CheckoutController extends Controller
@@ -58,14 +59,15 @@ class CheckoutController extends Controller
             Storage::disk('local')->append('stripe/stripe-logs.txt', 'Commande n°'.$order->id.' datant du : '.$order->created_at.PHP_EOL.$charge.PHP_EOL.'------------------------------------------------------------------------'.PHP_EOL);
 
             // envoyer un mail de confirmation
-            // $message['order_id'] = 434; //pour de faux
-            // $message['amount'] = $charge['amount']/100;
-            // $message['subject'] = 'Confirmation de votre commande';
+            $message['order_id'] = $order->id;
+            $message['amount'] = $order->total/100;
+            $message['subject'] = 'Confirmation de votre commande';
+            $message['content'] = \Cart::getContent();
 
-            // \Mail::to($customer['email'])->send(new MailFromSite($message));
+            \Mail::to($customer['email'])->send(new MailFromSite($message));
             
             // supprimer le panier
-            // \Cart::session(auth()->user()->id)->clear();
+            \Cart::clear();
 
         } catch (Exception $e) {
             $customer = '';
