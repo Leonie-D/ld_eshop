@@ -53,13 +53,17 @@ Route::group(['middleware' => ['language']], function() {
 
     // accès nécissitant authentification (finalisation commande, modification profil, accès backoffice)
     Route::group(['middleware' => ['auth']], function() {
+        // Visualisation et édition de profil
         // ATTENTION : certaines méthodes accessibles uniquement pour admin
         Route::resource('/user', 'UserController')->except(['create']);
+        Route::resource('/{user}/address', 'AddressController')->except(['index, create, show']);
+        Route::get('/order/{order}', 'OrderController@show')->name('order.show');
 
         // payement
         Route::get('/chekout', 'CheckoutController@checkout')->name('checkout');
         Route::post('/chekout/store/{deliveryAddress?}', 'CheckoutController@store')->name('checkout.store');
-        Route::post('/address/{user}', 'AddressController@select')->name('address.select');
+        Route::post('/{user}/address', 'AddressController@select')->name('address.select');
+
     });
     Auth::routes();
 });

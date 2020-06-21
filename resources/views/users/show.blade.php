@@ -18,7 +18,9 @@
                         @if($user->addresses->count() > 0)
                             <ul>
                                 @foreach($user->addresses as $address)
-                                <li> {{ $address->name }} : {{ $address->number}} {{ $address->road_name}}, {{ $address->postal_code}} {{ $address->city}}</li>
+                                <li> 
+                                    {{ $address->pivot->name }} : {{ $address->number}} {{ $address->road_name}}, {{ $address->postal_code}} {{ $address->city}}
+                                </li>
                                 @endforeach
                             </ul>
                         @else
@@ -29,7 +31,23 @@
             </li>
             <li>
                 {{ __('Orders') }}
-                A compléter !!!!!
+                @if($user->orders()->count() > 0)
+                <ul>
+                    @foreach($user->orders as $order)
+                    <li>
+                        <p>
+                            Commande n°{{$order->id}} : {{$order->total}}€
+                        </p>
+                        <p>
+                            Commande STATUT à compléter
+                        </p>
+                        <a href={{route('order.show', ['order' => $order])}}>
+                            {{__('See details')}}
+                        </a>
+                    </li>
+                    @endforeach
+                </ul>
+                @endif
             </li>
             <li>
                 {{ __('Services') }}

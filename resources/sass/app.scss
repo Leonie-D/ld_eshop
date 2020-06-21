@@ -11,8 +11,12 @@
     text-transform: uppercase;
 }
 
+.product-picture {
+    max-height: 10rem;
+}
+
 .cart-picture {
-    max-height: 50px;
+    max-height: 5rem;
 }
 
 .stripe-button-el {
