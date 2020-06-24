@@ -6,13 +6,13 @@
 
 <div class="container">
     <div class="row justify-content-center">
-        <h1 class="col-12 text-center">MaNats - {{__('All the categories')}}</h1>
-        <ul class="row list-unstyled">
+        <h1 class="col-12 text-center mb-5">MaNats - {{__('All the categories')}}</h1>
+        <ul class="list-unstyled">
             @foreach($categories as $category)
-                <li class="col-4 mb-4">
-                    <h3> 
+                <li class="mb-3">
+                    <h3>
                         <a href="{{ route('category.show', ['category' => $category]) }}">
-                            {{ __($category->name) }} 
+                            {{ __($category->name) }}
                             {{-- image --}}
                         </a>
                     </h3>

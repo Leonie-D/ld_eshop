@@ -4,10 +4,10 @@
 
 @section('content')
 <div class="container">
-@isset($panier)  
+@isset($panier)
 
         <div class="panier text-center">
-            <table class="table">
+            <table class="table bg-white">
                 <thead>
                     <tr>
                     <th>{{__('Name')}}</th>
@@ -22,33 +22,35 @@
                     </tr>
                 </thead>
                 <tbody>
-                @foreach($panier as $product)  
+                @foreach($panier as $product)
                     <tr>
-                        <td>{{$product->name}}</td>
-                        <td>{{__($product->attributes['color']->name)}}</td>
-                        <td>
+                        <td class="align-middle">{{$product->name}}</td>
+                        <td class="align-middle">{{__($product->attributes['color']->name)}}</td>
+                        <td class="align-middle">
                             <img class="cart-picture" src="{{asset(Storage::url('product-img/'.$product->associatedModel->id.'-'.$product->attributes['color']->id.'.jpg'))}}" alt="">
                         </td>
-                        <td>{{ number_format(round($product->associatedModel->priceTtc(), 2),2) }} €</td>
-                        <td>
+                        <td class="align-middle">{{ number_format(round($product->associatedModel->priceTtc(), 2),2) }} €</td>
+                        <td class="align-middle">
                             @if($product->quantity > 1)
-                                <a href="{{ route('panier.update', ['productId' => $product->id, 'method' => '-']) }}">-</a>
+                                <a class="btn btn-secondary" href="{{ route('panier.update', ['productId' => $product->id, 'method' => '-']) }}">-</a>
                             @else
                                 <a></a>
                             @endif
                         </td>
-                        <td>{{$product->quantity}}</td>
-                        <td>
+                        <td class="align-middle">{{$product->quantity}}</td>
+                        <td class="align-middle">
                             @if($product->quantity < 10)
-                                <a href="{{ route('panier.update', ['productId' => $product->id, 'method' => '+']) }}">+</a>
+                                <a class="btn btn-secondary" href="{{ route('panier.update', ['productId' => $product->id, 'method' => '+']) }}">+</a>
                             @endif
                         </td>
-                        <td>
+                        <td class="align-middle">
                             {{number_format(Round($product->quantity * $product->associatedModel->priceTtc(),2),2)}} €
                         </td>
-                        <td><a href="{{ route('panier.remove', ['productId' => $product->id]) }}">X</a></td>
+                        <td class="align-middle">
+                            <a class="btn btn-danger" href="{{ route('panier.remove', ['productId' => $product->id]) }}">X</a>
+                        </td>
                     </tr>
-                @endforeach  
+                @endforeach
                 <tr>
                     <td colspan="9"></td>
                 </tr>

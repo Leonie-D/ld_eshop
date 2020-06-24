@@ -36,7 +36,7 @@ class CheckoutController extends Controller
             // enregistrer la commande dans la BDD
             $order = new Order;
             $order->user_id = auth()->user()->id;
-            $order->step_id = 0;
+            $order->step_id = 1;
             $order->subtotal = \Cart::getSubTotal();
             $order->total = \Cart::getTotal();
             if(isset($deliveryAddress)) {
@@ -54,7 +54,7 @@ class CheckoutController extends Controller
                 $order_product->product_price = $product->price; // HT
                 $order_product->save();
             }
-            
+
             // enregistrer les info de payement dans un fichier de log
             Storage::disk('local')->append('stripe/stripe-logs.txt', 'Commande n°'.$order->id.' datant du : '.$order->created_at.PHP_EOL.$charge.PHP_EOL.'------------------------------------------------------------------------'.PHP_EOL);
 
@@ -65,7 +65,7 @@ class CheckoutController extends Controller
             $message['content'] = \Cart::getContent();
 
             \Mail::to($customer['email'])->send(new MailFromSite($message));
-            
+
             // supprimer le panier
             \Cart::clear();
 

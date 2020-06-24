@@ -72,5 +72,14 @@
     "Pay with card" : "Payer par carte",
     "New address" : "Nouvelle adresse",
     "Address name" : "Nom de l'addresse",
-    "Shipping addresses" : "Adresses de livraison"
+    "Shipping addresses" : "Adresses de livraison",
+    "See profil" :  "Voir mon profil",
+    "See details" : "Voir le détail",
+    "Order n°" : "Commande n°",
+    "Order" : "Commande",
+    "saved" : "enregistrée",
+    "shipped" : "expédiée",
+    "delivered" : "livrée",
+    "Your profil has been updated" : "Votre profil a bien été mis à jour",
+    "Validate" : "Valider"
 }

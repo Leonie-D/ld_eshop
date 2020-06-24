@@ -11,22 +11,22 @@
             <thead>
                 <tr>
                 <th>{{__('Name')}}</th>
-                <th>{{__('Color')}}</th>
-                <th>{{__('Picture')}}</th>
                 <th>{{__('Price')}}</th>
+                {{--Couleur et image...--}}
                 <th>{{__('Quantity')}}</th>
                 </tr>
             </thead>
             <tbody>
             @foreach($order->products as $product)
-                <th>{{$product->name}}</th>
-                <th>{{$product->pivot->color_id}}</th>
-                <th>{{$product->picture}}</th>
-                <th>{{$product->price}}</th>
-                <th>{{$product->pivot->quantity}}</th>
+                <tr>
+                    <th>{{$product->name}}</th>
+                    <th>{{$product->price}}</th>
+                    <th>{{$product->pivot->quantity}}</th>
+                </tr>
             @endforeach
             </tbody>
         </table>
+        <p>Total : {{$order->total}}€</p>
     </div>
 </div>
 

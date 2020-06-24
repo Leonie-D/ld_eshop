@@ -108,13 +108,13 @@ class UserController extends Controller
 
             // toast
             $request->session()->flash('title', 'Good news');
-            $request->session()->flash('message', 'Your profil has been updated, '.$request->firstname);
+            $request->session()->flash('message', 'Your profil has been updated');
 
             return redirect()->route('user.show', compact('user'));
         } else {
             return redirect()->back();
         }
-         
+
     }
 
     /**
