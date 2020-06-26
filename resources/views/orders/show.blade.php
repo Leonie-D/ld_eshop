@@ -10,18 +10,23 @@
         <table class="table">
             <thead>
                 <tr>
-                <th>{{__('Name')}}</th>
-                <th>{{__('Price')}}</th>
-                {{--Couleur et image...--}}
-                <th>{{__('Quantity')}}</th>
+                    <th>{{__('Name')}}</th>
+                    <th>{{__('Color')}}</th>
+                    <th>{{__('Picture')}}</th>
+                    <th>{{__('Price')}}</th>
+                    <th>{{__('Quantity')}}</th>
+                    <th>{{__('Total')}}</th>
                 </tr>
             </thead>
             <tbody>
-            @foreach($order->products as $product)
+            @foreach($panier as $item)
                 <tr>
-                    <th>{{$product->name}}</th>
-                    <th>{{$product->price}}</th>
-                    <th>{{$product->pivot->quantity}}</th>
+                    <th>{{$item["itemName"]}}</th>
+                    <th>{{$item["itemColor"]}}</th>
+                    <th>{{$item["itemPicture"]}}</th>
+                    <th>{{$item["itemPrice"]}}</th>
+                    <th>{{$item["itemQuantity"]}}</th>
+                    <th>{{$item["itemPrice"]*$item["itemQuantity"]}}</th>
                 </tr>
             @endforeach
             </tbody>

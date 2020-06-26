@@ -1,5 +1,7 @@
 @isset($product->colors[0])
-    <img class="product-picture align-self-center mb-2" src="{{asset(Storage::url('product-img/'.$product->colors[0]->pivot->picture.'.jpg'))}}" alt="">
+    <img class="product-picture align-self-center mb-2"
+         src="{{asset(Storage::url('product-img/'.$product->colors[0]->pivot->picture.'.jpg'))}}"
+         alt="{{$product->name.' image'}}">
 @endisset
 <p class="d-block w-100"> {{ $product->description }} </p>
 <p class="d-block w-100"> {{ number_format(round($product->priceTtc() ,2),2) }}€</p>
@@ -12,21 +14,22 @@
 @endphp
 
 @if($product->colors()->count()>0 && $stockTotal > 0)
-    <div class="d-flex">
-        <p class="pr-1"> {{__('Available in')}} </p>
-        <ul class="d-flex list-unstyled">
-            @foreach($product->colors as $key => $color)
-                @if($color->pivot->stock > 0)
-                    <li class="pr-1">
-                        {{ __($color->name) }}@if($key < $product->colors->count()-1), @endif
-                    </li>
-                @endif
-            @endforeach
-        </ul>
-    </div>
+    <ul class="d-flex flex-wrap mb-2 list-unstyled">
+        <li class="pr-1">{{__('Available in')}}</li>
+        @foreach($product->colors as $key => $color)
+            @if($color->pivot->stock > 0)
+                <li class="pr-1">
+                    {{ __($color->name) }}@if($key < $product->colors->count()-1), @endif
+                </li>
+            @endif
+        @endforeach
+    </ul>
 
-    <div class="dropdown-show">
-        <button class="btn btn-primary dropdown-toggle" type="button" id={{"dropdownMenu".$product->id}} data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    <div class="dropdown-show ">
+        <button class="btn btn-primary dropdown-toggle"
+                type="button" id={{"dropdownMenu".$product->id}} data-toggle="dropdown"
+                aria-haspopup="true"
+                aria-expanded="false">
             {{ __('Add to cart') }}
         </button>
         <div class="dropdown-menu dropdown-menu-right" aria-labelledby={{"dropdownMenu".$product->id}}>
