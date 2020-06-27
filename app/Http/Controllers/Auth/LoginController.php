@@ -47,7 +47,7 @@ class LoginController extends Controller
 
         // Set the previous url that we came from to redirect to after successful login but only if is internal
         if(($urlPrevious != $urlBase . '/login') && (substr($urlPrevious, 0, strlen($urlBase)) === $urlBase)) {
-            if($urlPrevious = route('panier.confirm')) { // si confirmation de la commande, passer à l'étape suivante
+            if($urlPrevious == route('panier.confirm')) { // si confirmation de la commande, passer à l'étape suivante
                 session()->put('url.intended', route('checkout'));
             } else {
                 session()->put('url.intended', $urlPrevious);
