@@ -1,6 +1,12 @@
-@isset($product->colors[0])
+@php
+    /*Un peu d'aléatoire pour ne pas avoir tous les produits dans la première couleur disponible*/
+    if($product->colors()->count() > 0) {
+        $i = rand(0, $product->colors()->count()-1);
+    }
+@endphp
+@isset($product->colors[$i])
     <img class="product-picture align-self-center mb-2"
-         src="{{asset(Storage::url('product-img/'.$product->colors[0]->pivot->picture.'.jpg'))}}"
+         src="{{asset(Storage::url('product-img/'.$product->colors[$i]->pivot->picture.'.jpg'))}}"
          alt="{{$product->name.' image'}}">
 @endisset
 <p class="d-block w-100"> {{ $product->description }} </p>
