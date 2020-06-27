@@ -28,9 +28,9 @@
                              src="{{asset(Storage::url('product-img/'.$item["itemPicture"].'.jpg'))}}"
                              alt="{{$item["itemName"].' image'}}">
                     </td>
-                    <td class="align-middle">{{$item["itemPrice"]}}€</td>
+                    <td class="align-middle">{{number_format(round($item["itemPrice"],2),2)}}€</td>
                     <td class="align-middle">{{$item["itemQuantity"]}}</td>
-                    <td class="align-middle">{{$item["itemPrice"]*$item["itemQuantity"]}}€</td>
+                    <td class="align-middle">{{number_format(round($item["itemPrice"]*$item["itemQuantity"],2),2)}}€</td>
                 </tr>
             @endforeach
                 <tr>

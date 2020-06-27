@@ -2,6 +2,12 @@
 
 @section('title') {{__('Checkout')}} @endsection
 
+@php
+    if(Session('delivery') === 'shop'){
+        $deliveryAddress = null;
+    }
+@endphp
+
 @section('content')
 
 <div class="container">
@@ -194,24 +200,24 @@
 
 @section('script')
 
-@isset($deliveryAddress)
-    <form action="{{route('checkout.store', ['deliveryAddress' => $deliveryAddress])}}" method="POST">
-        @csrf
-        <script type="application/javascript" src="https://checkout.stripe.com/checkout.js" class="stripe-button"
-            data-key="{{config('stripe.public_key')}}"
-            data-amount="{{Session('delivery') === 'home' ? (Round(\Cart::getTotal(),2)+5)*100 : Round(\Cart::getTotal(),2)*100}}"
-            data-name="{{config('app.name')}}"
-            data-description="Boutique de vetements pour hommes"
-            data-image=""
-            data-locale="auto"
-            data-currency="eur"
-            data-label="{{__('Pay with card')}}"
-            data-email="{{auth()->user()->email}}"
-            data-allow-remember-me="false">
-        </script>
-        <script type="application/javascript" src="https://checkout.stripe.com/checkout.js"></script>
-    </form>
-@endisset
+    @if(\Cart::getTotalQuantity() > 0 && (Session('delivery') === 'shop') || isset($deliveryAddress))
+        <form action="{{route('checkout.store', ['deliveryAddress' => $deliveryAddress])}}" method="POST">
+            @csrf
+            <script type="application/javascript" src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+                data-key="{{config('stripe.public_key')}}"
+                data-amount="{{Session('delivery') === 'home' ? (Round(\Cart::getTotal(),2)+5)*100 : Round(\Cart::getTotal(),2)*100}}"
+                data-name="{{config('app.name')}}"
+                data-description="Boutique de vêtements pour hommes"
+                data-image=""
+                data-locale="auto"
+                data-currency="eur"
+                data-label="{{__('Pay with card')}}"
+                data-email="{{auth()->user()->email}}"
+                data-allow-remember-me="false">
+            </script>
+            <script type="application/javascript" src="https://checkout.stripe.com/checkout.js"></script>
+        </form>
+    @endif
 
 <script type="application/javascript" src="{{ asset('js/optionalForm.js') }}"></script>
 @endsection

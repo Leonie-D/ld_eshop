@@ -83,5 +83,10 @@
     "Your profil has been updated" : "Votre profil a bien été mis à jour",
     "Validate" : "Valider",
     "details" : "détaillée",
-    "Order details" : "Votre commande détaillée"
+    "Order details" : "Votre commande détaillée",
+    "A confirmation has been sent by email." : "Une confirmation vous a été envoyée par e-mail.",
+    "Your order will be prepared carefully and shipped shortly." : "Nous nous chargeons de préparer votre commande avec soin et de vous l'expédier au plus vite.",
+    "Order confirmed" : "Commande confirmée",
+    "Thank you for your confidence in MaNats." : "Merci pour votre confiance.",
+    "Back to profil" : "Retour au profil"
 }
