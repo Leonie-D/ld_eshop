@@ -19,7 +19,7 @@ class OrderController extends Controller
                 "itemName" => $item->name,
                 "itemColor" => $color->name,
                 "itemPicture" => Color_product::where([['product_id', $item->id],['color_id', $color->id]])->first()->picture,
-                "itemPrice" => $item->price,
+                "itemPrice" => $item->priceTtc(),
                 "itemQuantity" => $item->pivot->quantity,
             ];
         }
