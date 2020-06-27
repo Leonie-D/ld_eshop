@@ -81,5 +81,7 @@
     "shipped" : "expédiée",
     "delivered" : "livrée",
     "Your profil has been updated" : "Votre profil a bien été mis à jour",
-    "Validate" : "Valider"
+    "Validate" : "Valider",
+    "details" : "détaillée",
+    "Order details" : "Votre commande détaillée"
 }

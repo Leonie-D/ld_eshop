@@ -27,12 +27,15 @@
                         <td class="align-middle">{{$product->name}}</td>
                         <td class="align-middle">{{__($product->attributes['color']->name)}}</td>
                         <td class="align-middle">
-                            <img class="cart-picture" src="{{asset(Storage::url('product-img/'.$product->associatedModel->id.'-'.$product->attributes['color']->id.'.jpg'))}}" alt="">
+                            <img class="cart-picture"
+                                 src="{{asset(Storage::url('product-img/'.$product->associatedModel->id.'-'.$product->attributes['color']->id.'.jpg'))}}"
+                                 alt="{{$product->name.' image'}}">
                         </td>
                         <td class="align-middle">{{ number_format(round($product->associatedModel->priceTtc(), 2),2) }} €</td>
                         <td class="align-middle">
                             @if($product->quantity > 1)
-                                <a class="btn btn-secondary" href="{{ route('panier.update', ['productId' => $product->id, 'method' => '-']) }}">-</a>
+                                <a class="btn btn-secondary"
+                                   href="{{ route('panier.update', ['productId' => $product->id, 'method' => '-']) }}">-</a>
                             @else
                                 <a></a>
                             @endif
@@ -56,7 +59,6 @@
                 </tr>
                 <tr>
                     <td colspan="8" class="text-right">{{__('Total excluding tax')}}</td>
-                    {{-- Je ne suis pas parvenue à affecter la condition par item au total uniquement... --}}
                     <td colspan="1">{{number_format(Round(\Cart::getSubTotal(),2),2)}} €</td>
                 </tr>
                 <tr>

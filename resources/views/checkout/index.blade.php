@@ -36,7 +36,7 @@
         </div>
 
         @if(Session('delivery') === 'home')
-        <div class="col-5">
+        <div class="col-7">
             <div class="card">
                 <div class="card-header">
                     {{-- Adresse de livraison --}}
@@ -48,22 +48,22 @@
                             {{$deliveryAddress->number.' '.$deliveryAddress->road_name.', '.$deliveryAddress->postal_code.' '.$deliveryAddress->city}}
                         </p>
                     @else
-                    
+
                         <form action="{{route('address.select', ['user' => auth()->user()->id])}}" method="POST">
                             @csrf
-                            
+
                             <div class="form-group">
                                 @if(auth()->user()->addresses()->count() > 0)
                                     {{-- liste des adresses connues--}}
                                     @foreach(Auth::user()->addresses as $address)
-                            
+
                                         <div class="form-check">
                                             <input class="form-check-input" type="radio" name="address" id="{{'address'.$address->id}}" value="{{$address->id}}" checked>
                                             <label class="form-check-label" for="{{'address'.$address->id}}">
                                                 @isset($address->pivot->name) {{$address->pivot->name}} @endisset : {{$address->number.' '.$address->road_name.', '.$address->postal_code.' '.$address->city}}
                                             </label>
                                         </div>
-                            
+
                                     @endforeach
 
                                     <div class="form-check">
@@ -75,60 +75,100 @@
 
                                 @endif
 
-                                    <div class="new-address">
-                                        <label for="name" class="ol-form-label text-md-right">{{ __('Address name') }}</label>
-                                        <div class="">
-                                            <input id="name" type="text" class="form-control @error('addressName') is-invalid @enderror" name="name" autofocus>
-            
-                                            @error('addressName')
+                                    <div class="new-address mt-3">
+                                        <div class="form-group row">
+                                            <label for="name"
+                                                   class="ol-form-label text-md-right pl-0 col-4">{{ __('Address name') }}</label>
+                                            <div class="col-8">
+                                                <input id="name"
+                                                       type="text"
+                                                       class="form-control @error('addressName') is-invalid @enderror"
+                                                       name="name"
+                                                       autofocus>
+
+                                                @error('addressName')
                                                 <span class="invalid-feedback" role="alert">
                                                     <strong>{{ $message }}</strong>
                                                 </span>
-                                            @enderror
+                                                @enderror
+                                            </div>
                                         </div>
 
-                                        <label for="number" class="ol-form-label text-md-right">n°</label>
-                                        <div class="">
-                                            <input id="number" type="text" class="form-control @error('addressNumber') is-invalid @enderror" name="number" autofocus>
-            
-                                            @error('addressNumber')
-                                                <span class="invalid-feedback" role="alert">
-                                                    <strong>{{ $message }}</strong>
-                                                </span>
-                                            @enderror
+                                        <div class="form-group row">
+                                            <label for="number" class="ol-form-label text-md-right pl-0 col-4">n°</label>
+                                            <div class="col-2">
+                                                <input id="number"
+                                                       type="text"
+                                                       class="form-control @error('addressNumber') is-invalid @enderror"
+                                                       name="number"
+                                                       autofocus>
+
+                                                @error('addressNumber')
+                                                    <span class="invalid-feedback" role="alert">
+                                                        <strong>{{ $message }}</strong>
+                                                    </span>
+                                                @enderror
+                                            </div>
                                         </div>
 
-                                        <label for="roadName" class="ol-form-label text-md-right">{{ __('Road name') }}</label>
-                                        <div class="">
-                                            <input id="roadName" type="text" class="form-control @error('roadName') is-invalid @enderror" name="roadName" autofocus>
-            
-                                            @error('roadName')
+                                        <div class="form-group row">
+                                            <label for="roadName"
+                                                   class="ol-form-label text-md-right pl-0 col-4">
+                                                {{ __('Road name') }}
+                                            </label>
+                                            <div class="col-8">
+                                                <input id="roadName"
+                                                       type="text"
+                                                       class="form-control @error('roadName') is-invalid @enderror"
+                                                       name="roadName"
+                                                       autofocus>
+
+                                                @error('roadName')
                                                 <span class="invalid-feedback" role="alert">
                                                     <strong>{{ $message }}</strong>
                                                 </span>
-                                            @enderror
+                                                @enderror
+                                            </div>
                                         </div>
 
-                                        <label for="zip" class="ol-form-label text-md-right">{{ __('Postal code') }}</label>
-                                        <div class="">
-                                            <input id="zip" type="text" class="form-control @error('zip') is-invalid @enderror" name="zip" autofocus>
-            
-                                            @error('zip')
-                                                <span class="invalid-feedback" role="alert">
-                                                    <strong>{{ $message }}</strong>
-                                                </span>
-                                            @enderror
+                                        <div class="form-group row">
+                                            <label for="zip"
+                                                   class="ol-form-label text-md-right pl-0 col-4">
+                                                {{ __('Postal code') }}
+                                            </label>
+                                            <div class="col-4">
+                                                <input id="zip"
+                                                       type="text"
+                                                       class="form-control @error('zip') is-invalid @enderror"
+                                                       name="zip"
+                                                       autofocus>
+
+                                                @error('zip')
+                                                    <span class="invalid-feedback" role="alert">
+                                                        <strong>{{ $message }}</strong>
+                                                    </span>
+                                                @enderror
+                                            </div>
                                         </div>
 
-                                        <label for="city" class="ol-form-label text-md-right">{{ __('City name') }}</label>
-                                        <div class="">
-                                            <input id="city" type="text" class="form-control @error('city') is-invalid @enderror" name="city" autofocus>
-            
-                                            @error('city')
-                                                <span class="invalid-feedback" role="alert">
-                                                    <strong>{{ $message }}</strong>
-                                                </span>
-                                            @enderror
+                                        <div class="form-group row">
+                                            <label for="city"
+                                                   class="ol-form-label text-md-right pl-0 col-4">
+                                                {{ __('City name') }}
+                                            </label>
+                                            <div class="col-8">
+                                                <input id="city"
+                                                       type="text"
+                                                       class="form-control @error('city') is-invalid @enderror"
+                                                       name="city"
+                                                       autofocus>
+
+                                                @error('city')
+                                                    <span class="invalid-feedback" role="alert">
+                                                        <strong>{{ $message }}</strong>
+                                                    </span>
+                                                @enderror
+                                            </div>
                                         </div>
                                     </div>
                             </div>
