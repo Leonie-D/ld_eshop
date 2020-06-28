@@ -51,6 +51,8 @@
                                 </li>
                             @endforeach
                         </ul>
+                    @else
+                        <p class="card-body">{{__('No order... yet !')}}</p>
                     @endif
                 </div>
             </div>

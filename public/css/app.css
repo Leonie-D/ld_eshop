@@ -10933,11 +10933,33 @@ a.text-dark:focus {
 }
 
 .product-picture {
-  max-height: 10rem;
+  max-height: 12rem;
+  width: auto;
 }
 
 .cart-picture {
   max-height: 5rem;
+  width: auto;
+}
+
+.galerie {
+  max-width: -webkit-fit-content;
+  max-width: -moz-fit-content;
+  max-width: fit-content;
+  display: grid;
+  grid-template-rows: repeat(3, max(4rem));
+  grid-auto-flow: column;
+  grid-column-gap: 0.5rem;
+  grid-row-gap: 0.5rem;
+}
+
+.galerie img:first-of-type {
+  grid-row: 1/-1;
+}
+
+.galerie img:not(:first-of-type) {
+  max-height: 4rem;
+  width: auto;
 }
 
 .stripe-button-el {

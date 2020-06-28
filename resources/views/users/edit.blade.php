@@ -20,7 +20,13 @@
                                 <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Name') }}</label>
 
                                 <div class="col-md-6">
-                                    <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ $user->name }}" required autocomplete="name" autofocus>
+                                    <input id="name"
+                                           type="text"
+                                           class="form-control @error('name') is-invalid @enderror"
+                                           name="name"
+                                           value="{{ $user->name }}"
+                                           required autocomplete="name"
+                                           autofocus>
 
                                     @error('name')
                                     <span class="invalid-feedback" role="alert">
@@ -34,7 +40,12 @@
                                 <label for="firstname" class="col-md-4 col-form-label text-md-right">{{ __('Firstname') }}</label>
 
                                 <div class="col-md-6">
-                                    <input id="firstname" type="text" class="form-control @error('firstname') is-invalid @enderror" name="firstname" value="{{ $user->firstname }}" required autocomplete="firstname" autofocus>
+                                    <input id="firstname"
+                                           type="text" class="form-control @error('firstname') is-invalid @enderror"
+                                           name="firstname"
+                                           value="{{ $user->firstname }}"
+                                           required autocomplete="firstname"
+                                           autofocus>
 
                                     @error('firstname')
                                     <span class="invalid-feedback" role="alert">
@@ -48,7 +59,12 @@
                                 <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('E-Mail Address') }}</label>
 
                                 <div class="col-md-6">
-                                    <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ $user->email }}" required autocomplete="email">
+                                    <input id="email"
+                                           type="email"
+                                           class="form-control @error('email') is-invalid @enderror"
+                                           name="email"
+                                           value="{{ $user->email }}"
+                                           required autocomplete="email">
 
                                     @error('email')
                                     <span class="invalid-feedback" role="alert">
@@ -62,7 +78,11 @@
                                 <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>
 
                                 <div class="col-md-6">
-                                    <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" autocomplete="new-password">
+                                    <input id="password"
+                                           type="password"
+                                           class="form-control @error('password') is-invalid @enderror"
+                                           name="password"
+                                           autocomplete="new-password">
 
                                     @error('password')
                                     <span class="invalid-feedback" role="alert">
@@ -102,9 +122,16 @@
                             <h4 class="col-12 text-center mb-3">{{__('Add a shipping address')}}</h4>
                             <div class="new-address col-12">
                                 <div class="form-group row">
-                                    <label for="addressName" class="ol-form-label text-md-right col-4">{{ __('Address name') }}</label>
+                                    <label for="addressName"
+                                           class="ol-form-label text-md-right col-4">
+                                        {{ __('Address name') }}
+                                    </label>
                                     <div class="col-6">
-                                        <input id="addressName" type="text" class="form-control @error('addressName') is-invalid @enderror" name="addressName" autofocus>
+                                        <input id="addressName"
+                                               type="text"
+                                               class="form-control @error('addressName') is-invalid @enderror"
+                                               name="addressName"
+                                               autofocus>
 
                                         @error('addressName')
                                         <span class="invalid-feedback" role="alert">
@@ -116,7 +143,10 @@
                                 <div class="form-group row">
                                     <label for="number" class="ol-form-label text-md-right col-4">n°</label>
                                     <div class="col-6">
-                                        <input id="number" type="text" class="form-control @error('addressNumber') is-invalid @enderror" name="number" autofocus>
+                                        <input id="number"
+                                               type="text"
+                                               class="form-control @error('addressNumber') is-invalid @enderror"
+                                               name="number" autofocus>
 
                                         @error('addressNumber')
                                         <span class="invalid-feedback" role="alert">
@@ -128,7 +158,11 @@
                                 <div class="form-group row">
                                     <label for="roadName" class="ol-form-label text-md-right col-4">{{ __('Road name') }}</label>
                                     <div class="col-6">
-                                        <input id="roadName" type="text" class="form-control @error('roadName') is-invalid @enderror" name="roadName" autofocus>
+                                        <input id="roadName"
+                                               type="text"
+                                               class="form-control @error('roadName') is-invalid @enderror"
+                                               name="roadName"
+                                               autofocus>
 
                                         @error('roadName')
                                         <span class="invalid-feedback" role="alert">
@@ -152,7 +186,11 @@
                                 <div class="form-group row">
                                     <label for="city" class="ol-form-label text-md-right col-4">{{ __('City name') }}</label>
                                     <div class="col-6">
-                                        <input id="city" type="text" class="form-control @error('city') is-invalid @enderror" name="city" autofocus>
+                                        <input id="city"
+                                               type="text"
+                                               class="form-control @error('city') is-invalid @enderror"
+                                               name="city"
+                                               autofocus>
 
                                         @error('city')
                                         <span class="invalid-feedback" role="alert">
@@ -173,10 +211,15 @@
                         </div>
                     </form>
 
-                    <form id="address-delete-form" action="{{ route('address.destroy', ['address' => $address, 'user' => $user->id]) }}" method="POST" style="display: none;">
-                        @method('DELETE')
-                        @csrf
-                    </form>
+                    @if($user->addresses()->count() > 0)
+                        <form id="address-delete-form"
+                              action="{{ route('address.destroy', ['address' => $address, 'user' => $user->id]) }}"
+                              method="POST"
+                              style="display: none;">
+                            @method('DELETE')
+                            @csrf
+                        </form>
+                    @endif
 
                 </div>
             </div>

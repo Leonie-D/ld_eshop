@@ -1,13 +1,15 @@
-@php
-    /*Un peu d'aléatoire pour ne pas avoir tous les produits dans la première couleur disponible*/
-    if($product->colors()->count() > 0) {
-        $i = rand(0, $product->colors()->count()-1);
-    }
-@endphp
-@isset($product->colors[$i])
+@isset($i)
     <img class="product-picture align-self-center mb-2"
          src="{{asset(Storage::url('product-img/'.$product->colors[$i]->pivot->picture.'.jpg'))}}"
          alt="{{$product->name.' image'}}">
+@else
+    <div class="bg-white galerie align-self-center mb-2">
+        @for($i = 0; $i < $product->colors()->count(); $i++)
+            <img class="product-picture align-self-center mb-2"
+                 src="{{asset(Storage::url('product-img/'.$product->colors[$i]->pivot->picture.'.jpg'))}}"
+                 alt="{{$product->name.' image'}}">
+        @endfor
+    </div>
 @endisset
 <p class="d-block w-100"> {{ $product->description }} </p>
 <p class="d-block w-100"> {{ number_format(round($product->priceTtc() ,2),2) }}€</p>

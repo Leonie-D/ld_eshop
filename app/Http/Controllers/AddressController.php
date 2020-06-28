@@ -80,7 +80,7 @@ class AddressController extends Controller
             ['user_id', '=', $userId],
             ['address_id', '=', $address->id]
         ])->value('name');
-        
+
         return view('addresses.edit', compact('address', 'addressName', 'userId'));
     }
 
@@ -93,7 +93,7 @@ class AddressController extends Controller
      */
     public function update(Request $request, int $userId, Address $address)
     {
-        
+
         if( auth()->user()->id === $userId || auth()->user()->admin) {
 
             if(isset($request->number) && isset($request->roadName) && isset($request->zip) && isset($request->city)) {
@@ -138,34 +138,20 @@ class AddressController extends Controller
             ['address_id', '=', $address->id],
             ['user_id', $userId]
             ])->delete();
+
         return redirect()->route('user.edit', ['user' => User::find($userId)]);
     }
 
     public function select(Request $request, int $userId) { // ici prévoir une validation des données du formulaire
-       
-        // si nouvelle adresse on la crée et sauvegarde en base
+
         if($request->address === 'new') {
-            // $address = new Address;
-            // $address->number = $request->number;
-            // $address->road_name = $request->roadName;
-            // $address->postal_code = $request->zip;
-            // $address->city = $request->city;
-
-            // $address->save();
-
-            // $address_user = new Address_user;
-            // $address_user->name = $request->name;
-            // $address_user->address_id = $address->id;
-            // $address_user->user_id = $userId;
-
-            // $address_user->save();
-
+            // si nouvelle adresse on la crée et sauvegarde en base
             // dans tous les cas, on renvoi l'adresse retenue à la page pour le futur stockage en base de la commande
-            $deliveryAddress = store($userId);
+            $deliveryAddress = $this->store($request, $userId);
         } else {
             $deliveryAddress = Address::findOrFail($request->address);
         }
 
-        return view('checkout.index', compact('deliveryAddress'));
+        return redirect()->route('checkout', ['deliveryAddress' => $deliveryAddress]);
     }
 }

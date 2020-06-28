@@ -32,7 +32,7 @@
                         <!-- Left Side Of Navbar -->
                         <ul class="navbar-nav mr-auto">
                             @if ($cartTotalQuantity > 0)
-                                <a href='{{route('panier.index')}}'>Panier ({{$cartTotalQuantity}})</a>
+                                <a href='{{route('panier.index')}}'>{{__('Cart')}} ({{$cartTotalQuantity}})</a>
                             @endif
                         </ul>
 
@@ -49,12 +49,12 @@
                                     {{ __('Categories') }}
                                 </button>
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenu">
-                                    <a class="dropdown-item" href=" {{ route('category.index') }}"> 
+                                    <a class="dropdown-item" href=" {{ route('category.index') }}">
                                         {{ __('All the categories') }}
                                     </a>
                                     <div class="dropdown-divider"></div>
                                     @foreach($mCategories as $mCategory)
-                                        <a class="dropdown-item" href=" {{ route('category.show', ['category' => $mCategory]) }}"> 
+                                        <a class="dropdown-item" href=" {{ route('category.show', ['category' => $mCategory]) }}">
                                             {{ __($mCategory->name) }}
                                         </a>
                                     @endforeach

@@ -60,8 +60,9 @@ Route::group(['middleware' => ['language']], function() {
         Route::get('/order/{order}', 'OrderController@show')->name('order.show');
 
         // payement
-        Route::get('/chekout', 'CheckoutController@checkout')->name('checkout');
+        Route::get('/chekout/{deliveryAddress?}', 'CheckoutController@checkout')->name('checkout');
         Route::post('/chekout/store/{deliveryAddress?}', 'CheckoutController@store')->name('checkout.store');
+        Route::get('/checkout/confirm/{error?}', 'CheckoutController@confirm')->name('checkout.confirm');
         Route::post('/{user}/address', 'AddressController@select')->name('address.select');
 
     });

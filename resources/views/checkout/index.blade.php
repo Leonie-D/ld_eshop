@@ -50,9 +50,11 @@
                 </div>
                 <div class="card-body">
                     @isset($deliveryAddress)
+
                         <p>
                             {{$deliveryAddress->number.' '.$deliveryAddress->road_name.', '.$deliveryAddress->postal_code.' '.$deliveryAddress->city}}
                         </p>
+
                     @else
 
                         <form action="{{route('address.select', ['user' => auth()->user()->id])}}" method="POST">
@@ -64,7 +66,12 @@
                                     @foreach(Auth::user()->addresses as $address)
 
                                         <div class="form-check">
-                                            <input class="form-check-input" type="radio" name="address" id="{{'address'.$address->id}}" value="{{$address->id}}" checked>
+                                            <input class="form-check-input"
+                                                   type="radio"
+                                                   name="address"
+                                                   id="{{'address'.$address->id}}"
+                                                   value="{{$address->id}}"
+                                                   checked>
                                             <label class="form-check-label" for="{{'address'.$address->id}}">
                                                 @isset($address->pivot->name) {{$address->pivot->name}} @endisset : {{$address->number.' '.$address->road_name.', '.$address->postal_code.' '.$address->city}}
                                             </label>
@@ -72,15 +79,17 @@
 
                                     @endforeach
 
+                                @endif
                                     <div class="form-check">
-                                        <input class="form-check-input" type="radio" name="address" id="new-address" value="new">
+                                        <input class="form-check-input"
+                                               type="radio"
+                                               name="address"
+                                               id="new-address"
+                                               value="new">
                                         <label class="form-check-label" for="new-address">
                                             {{__('New address')}}
                                         </label>
                                     </div>
-
-                                @endif
-
                                     <div class="new-address mt-3">
                                         <div class="form-group row">
                                             <label for="name"

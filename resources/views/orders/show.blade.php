@@ -36,6 +36,12 @@
                 <tr>
                     <td colspan="6"></td>
                 </tr>
+                @isset($order->address_id)
+                <tr>
+                    <td colspan="5" class="text-right">{{__('Home delivery')}}</td>
+                    <td colspan="1">5€</td>
+                </tr>
+                @endisset
                 <tr>
                     <td colspan="5" class="text-right">{{__('Total including tax')}}</td>
                     <td colspan="1">{{$order->total}}€</td>
@@ -45,7 +51,7 @@
     </div>
 
     <div class="row justify-content-center">
-        <a href={{ route('user.show', ['user' => auth()->user()]) }}>
+        <a href={{ route('user.show', ['user' => $order->user->id]) }}>
             {{__('Back to profil')}}
         </a>
     </div>

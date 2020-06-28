@@ -68,7 +68,7 @@ class RegisterController extends Controller
      * @return \App\User
      */
     protected function create(array $data)
-    {   
+    {
         return User::create([
             'name' => $data['name'],
             'firstname' => $data['firstname'],
@@ -85,7 +85,7 @@ class RegisterController extends Controller
 
         // Set the previous url that we came from to redirect to after successful registration but only if is internal
         if(($urlPrevious != $urlBase . '/register') && (substr($urlPrevious, 0, strlen($urlBase)) === $urlBase)) {
-            if($urlPrevious = route('panier.confirm')) { // si confirmation de la commande, passer à l'étape suivante
+            if($urlPrevious == route('panier.confirm')) { // si confirmation de la commande, passer à l'étape suivante
                 session()->put('url.intended', route('checkout'));
             } else {
                 session()->put('url.intended', $urlPrevious);

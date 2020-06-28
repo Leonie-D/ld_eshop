@@ -14,8 +14,8 @@ use Storage;
 
 class CheckoutController extends Controller
 {
-    public function checkout() {
-        return view('checkout.index');
+    public function checkout(?Address $deliveryAddress) {
+        return view('checkout.index', compact('deliveryAddress'));
     }
 
     public function store(Request $request, Address $deliveryAddress = null) {
@@ -31,7 +31,7 @@ class CheckoutController extends Controller
                 'currency' => 'eur',
             ]);
 
-            $error = '';
+            $error = null;
 
             // enregistrer la commande dans la BDD
             $order = new Order;
@@ -70,11 +70,15 @@ class CheckoutController extends Controller
             \Cart::clear();
 
         } catch (Exception $e) {
-            $customer = '';
-            $charge = '';
+            $customer = null;
+            $charge = null;
             $error = $e->getMessage();
         }
 
-        return view('checkout.confirmation', compact('customer', 'charge', 'error'));
+        return redirect()->route('checkout.confirm', ['error' => $error]);
+    }
+
+    public function confirm(string $error = null) {
+        return view('checkout.confirmation', compact('error'));
     }
 }
