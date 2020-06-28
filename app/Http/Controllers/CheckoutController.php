@@ -15,7 +15,7 @@ use Storage;
 
 class CheckoutController extends Controller
 {
-    public function checkout(?Address $deliveryAddress) {
+    public function checkout(Address $deliveryAddress = null) {
         return view('checkout.index', compact('deliveryAddress'));
     }
 
@@ -75,6 +75,9 @@ class CheckoutController extends Controller
                 ])->first();
                 $product->associatedModel->colors()->updateExistingPivot($product->attributes['color']->id, ['stock' => $color_product->stock-$product->quantity]);
             }
+
+            // vider variable session livraison
+            $request->session()->forget('delivery');
 
             // supprimer le panier
             \Cart::clear();
