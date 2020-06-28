@@ -7,6 +7,7 @@ use Stripe\Stripe;
 use Stripe\Customer;
 use Stripe\Charge;
 use App\Order;
+use App\Color_product;
 use App\Order_product;
 use App\Address;
 use App\Mail\MailFromSite;
@@ -65,6 +66,15 @@ class CheckoutController extends Controller
             $message['content'] = \Cart::getContent();
 
             \Mail::to($customer['email'])->send(new MailFromSite($message));
+
+            // modifier les stocks
+            foreach($panier as $product) {
+                $color_product = Color_product::where([
+                    ['product_id', $product->associatedModel->id],
+                    ['color_id', $product->attributes['color']->id]
+                ])->first();
+                $product->associatedModel->colors()->updateExistingPivot($product->attributes['color']->id, ['stock' => $color_product->stock-$product->quantity]);
+            }
 
             // supprimer le panier
             \Cart::clear();
