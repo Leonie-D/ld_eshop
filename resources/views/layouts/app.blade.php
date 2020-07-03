@@ -93,6 +93,11 @@
                                         <a class="dropdown-item" href={{ route('user.edit', ['user' => auth()->user()]) }}>
                                             {{__('Edit profil')}}
                                         </a>
+                                        @if(auth()->user()->admin)
+                                            <a class="dropdown-item" href={{ route('backoffice') }}>
+                                                {{__('Dashboard (admin only)')}}
+                                            </a>
+                                        @endif
                                     </div>
                                 </li>
                             @endguest
@@ -121,8 +126,13 @@
             @endif
         </main>
 
-        <footer>
-
+        <footer class="bg-white border-top">
+            <div class="container p-3">
+                <div class="row">
+                    <p class="h4 col-8">MaNats <small>- Men are NOT all the same</small></p>
+                    <a class="col-4 text-right" href={{route('contact')}}>{{__('Contact us')}}</a>
+                </div>
+            </div>
         </footer>
     </div>
 

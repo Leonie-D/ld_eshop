@@ -14,14 +14,7 @@
 <p class="d-block w-100"> {{ $product->description }} </p>
 <p class="d-block w-100"> {{ number_format(round($product->priceTtc() ,2),2) }}€</p>
 
-@php
-    $stockTotal = 0;
-    foreach($product->colors as $color){
-        $stockTotal += $color->pivot->stock;
-    }
-@endphp
-
-@if($product->colors()->count()>0 && $stockTotal > 0)
+@if($product->colors()->count()>0 && $product->stockTotalModel() > 0)
     <ul class="d-flex flex-wrap mb-2 list-unstyled">
         <li class="pr-1">{{__('Available in')}}</li>
         @foreach($product->colors as $key => $color)

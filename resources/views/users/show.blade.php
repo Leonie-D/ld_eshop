@@ -32,7 +32,7 @@
                 <div class="card">
                     <h4 class="card-header">{{ __('Services') }}</h4>
                     <ul class="list-unstyled card-body">
-                        <li><a href="">{{ __('Contact us') }}</a></li>
+                        <li><a href={{route('contact')}}>{{ __('Contact us') }}</a></li>
                         <li><a href="{{ route('user.edit', ['user' => $user]) }}">{{ __('Edit profil') }}</a></li>
                     </ul>
                 </div>

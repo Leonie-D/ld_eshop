@@ -16,7 +16,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        //
+        return view('users.index');
     }
 
     /**
@@ -48,7 +48,11 @@ class UserController extends Controller
      */
     public function show(User $user)
     {
-        return view('users.show', compact('user'));
+        if($user == auth()->user() || auth()->user()->admin) {
+            return view('users.show', compact('user'));
+        } else {
+            return redirect()->back();
+        }
     }
 
     /**
@@ -59,7 +63,7 @@ class UserController extends Controller
      */
     public function edit(User $user)
     {
-        if($user == auth()->user() || $user->admin) {
+        if($user == auth()->user() || auth()->user()->admin) {
             return view('users.edit', compact('user'));
         } else {
             return redirect()->back();
@@ -75,7 +79,7 @@ class UserController extends Controller
      */
     public function update(Request $request, User $user)
     {
-        if($user->id == auth()->user()->id || $user->admin) {
+        if($user->id == auth()->user()->id || auth()->user()->admin) {
 
             // idéalement dans un try and catch...
             $user->name = $request->name;
@@ -86,25 +90,6 @@ class UserController extends Controller
             }
 
             $user->save();
-
-            if(isset($request->number) && isset($request->roadName) && isset($request->zip) && isset($request->city)) {
-                $address = new Address;
-                $address->number = $request->number;
-                $address->road_name = $request->roadName;
-                $address->postal_code = $request->zip;
-                $address->city = $request->city;
-
-                $address->save();
-
-                $address_user = new Address_user;
-                if(isset($request->addressName)){
-                    $address_user->name = $request->addressName;
-                }
-                $address_user->address_id = $address->id;
-                $address_user->user_id = $user->id;
-
-                $address_user->save();
-            }
 
             // toast
             $request->session()->flash('title', 'Good news');
@@ -123,8 +108,29 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(User $user)
     {
-        // admin seulement ?
+        if(auth()->user()->admin) {
+            dd($user);
+            //on conserve ses commandes mais on supprime ses adresses
+            // suppression discutable des clients mais pour l'exo ok !
+            foreach($user->addresses as $address){
+
+                Address_user::where([
+                    ['address_id', $address->id],
+                    ['user_id', $user->id]
+                ])->delete();
+
+                $address->delete();
+
+            }
+
+            $user->delete();
+
+            return redirect()->route('backoffice');
+
+        } else {
+            return redirect()->back();
+        }
     }
 }

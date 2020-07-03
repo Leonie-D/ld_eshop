@@ -98,5 +98,20 @@
     "Your wish is our command!" : "Vos souhaits seront bientôt réalisés",
     "Your order n°" : "Votre commande n°",
     " will be prepared carefully and shipped shortly." : " sera préparée avec soin et expédiée au plus vite.",
-    "No order... yet !" : "Aucune commande... jusqu'à aujourd'hui!"
+    "Your order :" : "Votre commande :",
+    "No order... yet !" : "Aucune commande... jusqu'à aujourd'hui!",
+    "By phone" : "Par téléphone",
+    "Learn more about our products, please contact one of our customer advisors :" : "Une question sur nos produits, nos conseillers sont à votre écoute :",
+    "For claims, please contact our customer service :" : "Pour toute réclamation, merci de contacter notre service consommateurs",
+    "By mail" : "Par email",
+    "Send us an email at :" : "Ecrivez nous à",
+    "To come and see us" : "Venez nous rendre visite",
+    "Find our shop at" : "Notre boutique est située au",
+    "Add a shipping address" : "Ajouter une adresse de livraison",
+    "Dashboard" : "Tableau de bord",
+    "Dashboard (admin only)" : "Tableau de bord (admin seulement)",
+    "Manage customers' accounts" : "Administrer les comptes clients",
+    "See customer profil" : "Voir le profil du client",
+    "Edit customer profil" : "Modifier le profil du client",
+    "See" : "Voir"
 }

@@ -26,4 +26,12 @@ class Product extends Model
     public function priceTtc() {
         return $this->price * 1.2;
     }
+
+    public function stockTotalModel() {
+        $stockTotalModel = 0;
+        foreach($this->colors as $color){
+            $stockTotalModel += $color->pivot->stock;
+        }
+        return $stockTotalModel;
+    }
 }

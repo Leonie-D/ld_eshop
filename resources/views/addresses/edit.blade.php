@@ -10,7 +10,7 @@
         <div class="col-md-8">
             <div class="card">
                 <div class="card-header">{{ __('Edit shipping address') }}</div>
-                
+
                 <div class="card-body">
                     <form method="POST" action="{{ route('address.update', ['user' => $userId, 'address' => $address]) }}">
                         @method("PUT")
@@ -94,6 +94,12 @@
                 </div>
             </div>
         </div>
+    </div>
+
+    <div class="row justify-content-center mt-3">
+        <a href={{ route('user.show', ['user' => $userId]) }}>
+            {{__('Back to profil')}}
+        </a>
     </div>
 </div>
 @endsection

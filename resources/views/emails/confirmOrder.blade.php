@@ -1,5 +1,5 @@
 <h1>{{__('Your wish is our command!')}}</h1>
-<p>{{__('Your order n°'.$orderId.' will be prepared carefully and shipped shortly.')}}</p>
+<p>{{__('Your order n°')}}{{$orderId}}{{__(' will be prepared carefully and shipped shortly.')}}</p>
 <p>{{__('Your order :')}}</p>
 
 <table class="table">
@@ -26,7 +26,7 @@
         @endforeach
     </tbody>
 </table>
-            
+
 <p>{{__('Total including tax')}} : {{$amount * 100}}€</p>
 
-<p>{{__('Thank you for your confidence in MaNats.')}}</p> 
+<p>{{__('Thank you for your confidence in MaNats.')}}</p>

@@ -12,4 +12,8 @@ class WelcomeController extends Controller
 
         return view('index', compact('someProducts'));
     }
+
+    public function contact() {
+        return view('contact');
+    }
 }

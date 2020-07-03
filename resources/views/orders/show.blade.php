@@ -44,7 +44,11 @@
                 @endisset
                 <tr>
                     <td colspan="5" class="text-right">{{__('Total including tax')}}</td>
-                    <td colspan="1">{{$order->total}}€</td>
+                    @isset($order->address_id)
+                        <td colspan="1">{{$order->total + 5}}€</td>
+                    @else
+                        <td colspan="1">{{$order->total}}€</td>
+                    @endisset
                 </tr>
             </tbody>
         </table>

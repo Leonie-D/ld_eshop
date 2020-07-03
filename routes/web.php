@@ -35,11 +35,14 @@ Route::group(['middleware' => ['language']], function() {
     // accueil
     Route::get('/', 'WelcomeController@index')->name('home');
 
+    // contact
+    Route::get('/contact', 'WelcomeController@contact')->name('contact');
+
     // routes liés aux produits // ATTENTION : certaines méthodes accessibles uniquement pour admin et/ou chef de rayon
-    Route::resource('/product', 'ProductController');
+    Route::resource('/product', 'ProductController')->only(['index', 'show']);
 
     // routes liés aux catégories // ATTENTION : certaines méthodes accessibles uniquement pour admin et/ou chef de rayon
-    Route::resource('/category', 'CategoryController');
+    Route::resource('/category', 'CategoryController')->only(['index', 'show']);
 
     // routes liées au panier
     Route::prefix('panier')->group(function(){
@@ -55,7 +58,7 @@ Route::group(['middleware' => ['language']], function() {
     Route::group(['middleware' => ['auth']], function() {
         // Visualisation et édition de profil
         // ATTENTION : certaines méthodes accessibles uniquement pour admin
-        Route::resource('/user', 'UserController')->except(['create']);
+        Route::resource('/user', 'UserController')->except(['index','create']);
         Route::resource('/{user}/address', 'AddressController')->except(['index, create, show']);
         Route::get('/order/{order}', 'OrderController@show')->name('order.show');
 
@@ -63,7 +66,18 @@ Route::group(['middleware' => ['language']], function() {
         Route::get('/chekout/{deliveryAddress?}', 'CheckoutController@checkout')->name('checkout');
         Route::post('/chekout/store/{deliveryAddress?}', 'CheckoutController@store')->name('checkout.store');
         Route::get('/checkout/confirm/{error?}', 'CheckoutController@confirm')->name('checkout.confirm');
-        Route::post('/{user}/address', 'AddressController@select')->name('address.select');
+        Route::post('/select/{user}/address', 'AddressController@select')->name('address.select');
+
+        // backoffice admin
+        Route::group(['middleware' => ['can:admin-access']], function() {
+            Route::get('/admin', 'BackOfficeController@index')->name('backoffice');
+            Route::get('/admin/user', 'UserController@index')->name('user.index');
+        });
+
+        // backoffice chef de rayon
+        Route::group(['middleware' => ['can:chef-rayon-access']], function() {
+            Route::put('/product', 'ProductController')->name('product.update');
+        });
 
     });
     Auth::routes();

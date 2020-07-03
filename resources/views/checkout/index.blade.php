@@ -95,10 +95,10 @@
                                             <label for="name"
                                                    class="ol-form-label text-md-right pl-0 col-4">{{ __('Address name') }}</label>
                                             <div class="col-8">
-                                                <input id="name"
+                                                <input id="addressName"
                                                        type="text"
                                                        class="form-control @error('addressName') is-invalid @enderror"
-                                                       name="name"
+                                                       name="addressName"
                                                        autofocus>
 
                                                 @error('addressName')
