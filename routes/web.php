@@ -76,7 +76,8 @@ Route::group(['middleware' => ['language']], function() {
 
         // backoffice chef de rayon
         Route::group(['middleware' => ['can:chef-rayon-access']], function() {
-            Route::put('/product', 'ProductController')->name('product.update');
+            Route::put('/product/{product}', 'ProductController@update')->name('product.update');
+            Route::get('/product/{product}/edit', 'ProductController@edit')->name('product.edit');
         });
 
     });
