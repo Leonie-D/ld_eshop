@@ -114,5 +114,21 @@
     "See customer profil" : "Voir le profil du client",
     "Edit customer profil" : "Modifier le profil du client",
     "See" : "Voir",
-    "Availability" : "Disponibilité"
+    "Availability" : "Disponibilité",
+    "Manage stocks" : "Gérer les stocks",
+    "Add to stock" : "Ajouter aux stocks",
+    "Manage orders" : "Gérer les commandes",
+    "registered users" : "utilisateurs enregistrés",
+    "saved order(s)" : "commande(s) enregistrée(s)",
+    "shipped order(s)" : "commande(s) expédiée(s)",
+    "delivered order(s)" : "commande(s) livrée(s)",
+    "Step" : "Etape",
+    "Update step" : "Mettre à jour",
+    "Stock has been updated" : "Le stock a bien été mis à jour",
+    "Order status has been updated" : "Le statut de la commande a bien été mis à jour",
+    "Mark as shipped" : "Noter comme expédiée",
+    "Mark as delivered" : "Noter comme livrée",
+    "Customer" : "Client",
+    "Back to dashboard" : "Retour au tableau de bord",
+    "Manage products' stocks" : "Gérer les stocks"
 }

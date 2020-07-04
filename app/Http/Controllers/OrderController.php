@@ -9,8 +9,14 @@ use App\Color_product;
 
 class OrderController extends Controller
 {
-    public function show(Order $order) {
+    public function index()
+    {
+        $orders = Order::all();
+        return view('orders.index', compact('orders'));
+    }
 
+    public function show(Order $order)
+    {
         // reconstitution du panier détaillé
         foreach($order->products as $item){
             $color =  Color::find($item->pivot->color_id);
@@ -25,5 +31,24 @@ class OrderController extends Controller
         }
 
         return view('orders.show', compact('order', 'panier'));
+    }
+
+    public function update(Request $request, Order $order)
+    {
+        if(auth()->user()->admin) {
+
+            // idéalement dans un try and catch...
+            $order->step_id = $request->updateStep;
+
+            $order->save();
+
+            // toast
+            $request->session()->flash('title', 'Good news');
+            $request->session()->flash('message', 'Order status has been updated');
+
+            return redirect()->route('order.index');
+        } else {
+            return redirect()->back();
+        }
     }
 }

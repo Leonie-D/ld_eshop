@@ -26,7 +26,15 @@
         @endforeach
     </ul>
 
-    <div class="dropdown-show ">
+    @auth
+        @if(auth()->user()->chefRayon)
+            <a class="btn btn-success align-self-start mb-2" href={{route('product.edit', ['product' => $product])}}>
+                {{ __('Manage stocks') }}
+            </a>
+        @endif
+    @endauth
+
+    <div class="dropdown-show mb-2">
         <button class="btn btn-primary dropdown-toggle"
                 type="button" id={{"dropdownMenu".$product->id}} data-toggle="dropdown"
                 aria-haspopup="true"

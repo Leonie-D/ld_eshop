@@ -20,18 +20,35 @@
                 <p class="d-block w-100"> {{ $product->description }} </p>
                 <p class="d-block w-100"> {{ number_format(round($product->priceTtc() ,2),2) }}€</p>
 
-                <ul class="d-flex flex-wrap mb-2 list-unstyled">
-                    <li class="pr-1">{{__('Availability')}}</li>
-                    <ul>
-                        @foreach($product->colors as $key => $color)
-                            @php
-                                $class = $color->pivot->stock > 0 ?  'text-dark' : 'text-danger'
-                            @endphp
-                            <li class="pr-1 {{$class}}">
-                                {{ __($color->name) }} : {{$color->pivot->stock}}
-                            </li>
-                        @endforeach
-                    </ul>
+                <p class="d-block w-100">{{__('Availability')}}</p>
+                <ul>
+                    @foreach($product->colors as $key => $color)
+                        @php
+                            $class = $color->pivot->stock > 0 ?  'text-dark' : 'text-danger'
+                        @endphp
+
+                        <li class="pr-1 {{$class}} row">
+                            <p class="col-2">{{ __($color->name) }} : {{$color->pivot->stock}}</p>
+
+                            <form method="POST"
+                                  action="{{ route('product.update', ['product' => $product, 'color' => $color]) }}"
+                                  class="col-10">
+                            @method('PUT')
+                            @csrf
+                                <div class="form-group row">
+                                    <label class="col-4 text-right" for="stock">{{__('Add to stock')}}</label>
+                                    <input id="stock"
+                                           type="number"
+                                           class="col-2"
+                                           name="stock"
+                                           autofocus>
+                                    <button type="submit" class="btn btn-primary col-2 ml-2">
+                                        {{ __('Validate') }}
+                                    </button>
+                                </div>
+                            </form>
+                        </li>
+                    @endforeach
                 </ul>
 
             </div>

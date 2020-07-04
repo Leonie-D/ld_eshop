@@ -94,8 +94,12 @@
                                             {{__('Edit profil')}}
                                         </a>
                                         @if(auth()->user()->admin)
-                                            <a class="dropdown-item" href={{ route('backoffice') }}>
+                                            <a class="dropdown-item" href={{ route('backoffice.admin') }}>
                                                 {{__('Dashboard (admin only)')}}
+                                            </a>
+                                        @elseif(auth()->user()->chefRayon)
+                                            <a class="dropdown-item" href={{ route('backoffice.chefRayon') }}>
+                                                {{__("Manage products' stocks")}}
                                             </a>
                                         @endif
                                     </div>

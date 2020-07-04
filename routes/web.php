@@ -70,13 +70,16 @@ Route::group(['middleware' => ['language']], function() {
 
         // backoffice admin
         Route::group(['middleware' => ['can:admin-access']], function() {
-            Route::get('/admin', 'BackOfficeController@index')->name('backoffice');
+            Route::get('/admin', 'BackOfficeController@admin')->name('backoffice.admin');
             Route::get('/admin/user', 'UserController@index')->name('user.index');
+            Route::get('/admin/order', 'OrderController@index')->name('order.index');
+            Route::put('/admin/order/{order}', 'OrderController@update')->name('order.update');
         });
 
         // backoffice chef de rayon
         Route::group(['middleware' => ['can:chef-rayon-access']], function() {
-            Route::put('/product/{product}', 'ProductController@update')->name('product.update');
+            Route::get('/chefRayon', 'BackOfficeController@chefRayon')->name('backoffice.chefRayon');
+            Route::put('/product/{product}/{color}', 'ProductController@update')->name('product.update');
             Route::get('/product/{product}/edit', 'ProductController@edit')->name('product.edit');
         });
 
