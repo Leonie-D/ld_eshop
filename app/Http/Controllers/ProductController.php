@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Product;
 use App\Color;
 use App\Color_product;
+use App\Http\Requests\StockFormRequest;
 
 class ProductController extends Controller
 {
@@ -74,7 +75,7 @@ class ProductController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Product $product, Color $color)
+    public function update(StockFormRequest $request, Product $product, Color $color)
     {
         if(auth()->user()->chefRayon) {
             $color_product = Color_product::where([

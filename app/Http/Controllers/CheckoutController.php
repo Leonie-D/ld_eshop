@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Notifications\NewOrder;
+use App\User;
 use Illuminate\Http\Request;
 use Stripe\Stripe;
 use Stripe\Customer;
@@ -66,6 +68,12 @@ class CheckoutController extends Controller
             $message['content'] = \Cart::getContent();
 
             \Mail::to($customer['email'])->send(new MailFromSite($message));
+
+            // enregistrer les notifications aux admins
+            $admins = User::whereAdmin(true)->get();
+            foreach($admins as $admin) {
+                $admin->notify(new NewOrder($order));
+            }
 
             // modifier les stocks
             foreach($panier as $product) {

@@ -22,7 +22,7 @@
 
                 <p class="d-block w-100">{{__('Availability')}}</p>
                 <ul>
-                    @foreach($product->colors as $key => $color)
+                    @foreach($product->colors as $color)
                         @php
                             $class = $color->pivot->stock > 0 ?  'text-dark' : 'text-danger'
                         @endphp
@@ -39,9 +39,14 @@
                                     <label class="col-4 text-right" for="stock">{{__('Add to stock')}}</label>
                                     <input id="stock"
                                            type="number"
-                                           class="col-2"
+                                           class="col-2 form-control @error('stock') is-invalid @enderror"
                                            name="stock"
                                            autofocus>
+                                    @error('stock')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
                                     <button type="submit" class="btn btn-primary col-2 ml-2">
                                         {{ __('Validate') }}
                                     </button>

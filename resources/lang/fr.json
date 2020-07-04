@@ -130,5 +130,7 @@
     "Mark as delivered" : "Noter comme livrée",
     "Customer" : "Client",
     "Back to dashboard" : "Retour au tableau de bord",
-    "Manage products' stocks" : "Gérer les stocks"
+    "Manage products' stocks" : "Gérer les stocks",
+    "Permissions are needed to access this page" : "L'accès à cette page est réservé",
+    "Access not allowed" : "Accès non autorisé"
 }

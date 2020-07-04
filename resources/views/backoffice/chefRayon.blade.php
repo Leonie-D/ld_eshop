@@ -27,13 +27,26 @@
                             <tbody>
                             @foreach($products as $product)
                                 <tr>
-                                    <td class="col-2">{{$product->name}}</td>
-                                    <td class="col-1">{{number_format(round($product->priceTtc(), 2), 2)}}€</td>
-                                    <td class="col-6">
+                                    <td class="align-middle col-2">{{$product->name}}</td>
+                                    <td class="align-middle col-1">{{number_format(round($product->priceTtc(), 2), 2)}}€</td>
+                                    <td class="align-middle col-6">
+                                        <ul class="mb-0">
+                                            @foreach($product->colors as $color)
+                                                @php
+                                                    $class = $color->pivot->stock > 0 ?  'text-dark' : 'text-danger'
+                                                @endphp
 
+                                                <li class="pr-1 {{$class}} row">
+                                                    {{ __($color->name) }} : {{$color->pivot->stock}}
+                                                </li>
+                                            @endforeach
+                                        </ul>
                                     </td>
-                                    <td class="col-3">
-
+                                    <td class="align-middle col-3">
+                                        <a class="btn btn-primary"
+                                           href={{route('product.edit', ['product' => $product])}}>
+                                            {{__('Add to stock')}}
+                                        </a>
                                     </td>
                                 </tr>
                             @endforeach

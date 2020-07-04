@@ -9,6 +9,7 @@ use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
+use App\Notifications\NewCustomer;
 
 class RegisterController extends Controller
 {
@@ -69,12 +70,20 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        return User::create([
+        $user = User::create([
             'name' => $data['name'],
             'firstname' => $data['firstname'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
         ]);
+
+        // notification aux admins
+        $admins = User::whereAdmin(true)->get();
+        foreach($admins as $admin) {
+            $admin->notify(new  NewCustomer($user));
+        }
+
+        return $user;
     }
 
     public function showRegistrationForm()
