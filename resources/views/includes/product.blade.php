@@ -42,7 +42,7 @@
             {{ __('Add to cart') }}
         </button>
         <div class="dropdown-menu dropdown-menu-right" aria-labelledby={{"dropdownMenu".$product->id}}>
-            @foreach($product->colors as $key => $color)
+            @foreach($product->colors as $color)
                 @if($color->pivot->stock > 0)
                     <a class="dropdown-item" href=" {{ route('panier.add', ['product' => $product, 'color' => $color]) }}">
                         {{ __($color->name) }}

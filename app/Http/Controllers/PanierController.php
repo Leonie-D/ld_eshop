@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Color_product;
 use Illuminate\Http\Request;
 use App\Product;
 use App\Color;
@@ -29,7 +30,7 @@ class PanierController extends Controller
 
             return view('panier.index', compact('panier'));
 
-        } elseif(url()->previous() != route('panier.index')) { 
+        } elseif(url()->previous() != route('panier.index')) {
 
             // si on essaye d'accéder au panier alors qu'il est vide, on reste sur notre page
             return redirect()->back();
@@ -43,7 +44,7 @@ class PanierController extends Controller
     }
 
     public function add(Request $request, Product $product, Color $color){
-        
+
         // récupérer la 'place' du dernier article ajouté pour l'incrémenter pour l'ajout en cours
         // permet de fixer l'ordre des produits à l'affichage du panier
         $panier = \Cart::getContent();
@@ -55,13 +56,15 @@ class PanierController extends Controller
         } else {
             $order = 1;
         }
-        
+
+        $color_product = Color_product::where([['product_id', $product->id], ['color_id', $color->id]])->first();
+
         \Cart::add([
             'id' => $product->id.'-'.$color->id,
             'name' => $product->name,
             'price' => $product->price,
             'quantity' => 1,
-            'attributes' => array('color' => $color, 'order' => $order),
+            'attributes' => array('color' => $color, 'order' => $order, 'stock'=> $color_product->stock),
             'associatedModel' => $product,
         ]);
 
@@ -94,7 +97,7 @@ class PanierController extends Controller
                 $quantity = -1;
             } elseif($method === '+') {
                 $quantity = +1;
-            } 
+            }
 
             \Cart::update($productId, array(
                 'quantity' => $quantity,

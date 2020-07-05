@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Notifications\NewOrder;
+use App\Notifications\ProductOutOfStock;
 use App\User;
 use Illuminate\Http\Request;
 use Stripe\Stripe;
@@ -82,6 +83,14 @@ class CheckoutController extends Controller
                     ['color_id', $product->attributes['color']->id]
                 ])->first();
                 $product->associatedModel->colors()->updateExistingPivot($product->attributes['color']->id, ['stock' => $color_product->stock-$product->quantity]);
+
+                // et notifier les chefs de rayon en cas de stocks atteignant 0
+                $chefsRayon = User::where('chefRayon', true)->get();
+                if($color_product->stock-$product->quantity === 0){
+                    foreach($chefsRayon as $chefRayon) {
+                        $chefRayon->notify(new ProductOutOfStock($color_product));
+                    }
+                }
             }
 
             // vider variable session livraison

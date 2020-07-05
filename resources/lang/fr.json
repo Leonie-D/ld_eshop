@@ -132,5 +132,8 @@
     "Back to dashboard" : "Retour au tableau de bord",
     "Manage products' stocks" : "Gérer les stocks",
     "Permissions are needed to access this page" : "L'accès à cette page est réservé",
-    "Access not allowed" : "Accès non autorisé"
+    "Access not allowed" : "Accès non autorisé",
+    "new order(s)" : "nouvelle(s) commande(s)",
+    "new user(s)" : "nouveau(x) utilisateur(s)",
+    "new product(s) out of stock" : "nouveau(x) produit(s) en rupture de stock"
 }

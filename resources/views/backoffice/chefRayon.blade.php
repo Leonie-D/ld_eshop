@@ -15,6 +15,17 @@
                     </div>
 
                     <div class="card-body">
+                        @if(isset($notifications) && $notifications->count()>0)
+                            <p>{{$notifications->count()}} {{__('new product(s) out of stock')}}</p>
+                            <ul>
+                                @foreach($notifications as $notification)
+                                    <li>
+                                        {{$notification->data['product_name']}} {{$notification->data['color_name']}}
+                                    </li>
+                                @endforeach
+                            </ul>
+                        @endif
+
                         <table class="table bg-white">
                             <thead>
                             <tr>

@@ -15,7 +15,7 @@
                         <p>{{$users->count()}} {{__('registered users')}}</p>
 
                         @if(isset($customerNotifications) && $customerNotifications->count()>0)
-                            <p>{{$customerNotifications->count()}} {{__('new users')}}</p>
+                            <p>{{$customerNotifications->count()}} {{__('new user(s)')}}</p>
                             <ul>
                                 @foreach($customerNotifications as $notification)
                                     <li>
@@ -42,7 +42,7 @@
                         </ul>
 
                         @if(isset($orderNotifications) && $orderNotifications->count()>0)
-                            <p>{{$orderNotifications->count()}} {{__('new orders')}}</p>
+                            <p>{{$orderNotifications->count()}} {{__('new order(s)')}}</p>
                         @endif
 
                         <a href={{route('order.index', compact('orders'))}}>{{__("Manage orders")}}</a>

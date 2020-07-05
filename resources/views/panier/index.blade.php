@@ -42,7 +42,7 @@
                         </td>
                         <td class="align-middle">{{$product->quantity}}</td>
                         <td class="align-middle">
-                            @if($product->quantity < 10)
+                            @if($product->quantity < $product->attributes['stock'])
                                 <a class="btn btn-secondary" href="{{ route('panier.update', ['productId' => $product->id, 'method' => '+']) }}">+</a>
                             @endif
                         </td>
