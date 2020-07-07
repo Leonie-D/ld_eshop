@@ -18,6 +18,8 @@
 
                         <input id="userId" type="text" value="" class="form-control" name="userId" hidden>
 
+                        <input name="address" value="new" hidden>
+
                         <div class="form-group row">
                             <label for="addressName" class="ol-form-label text-md-right col-4">{{ __('Address name') }}</label>
                             <div class="col-6">

@@ -135,5 +135,9 @@
     "Access not allowed" : "Accès non autorisé",
     "new order(s)" : "nouvelle(s) commande(s)",
     "new user(s)" : "nouveau(x) utilisateur(s)",
-    "new product(s) out of stock" : "nouveau(x) produit(s) en rupture de stock"
+    "new product(s) out of stock" : "nouveau(x) produit(s) en rupture de stock",
+    "Edit shipping address" : "Modifier l'adresse de livraison",
+    "Add shipping address" : "Ajouter une adresse de livraison",
+    "See previous product" : "Voir le produit précédent",
+    "See next product" : "Voir le produit suivant"
 }

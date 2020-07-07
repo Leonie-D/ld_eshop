@@ -140,6 +140,8 @@
                                 <form method="POST" action="{{ route('address.store', ['user' => $user->id]) }}">
                                     @method('POST')
                                     @csrf
+
+                                            <input name="address" value="new" hidden>
                                             <div class="form-group row">
                                                 <label for="addressName"
                                                        class="ol-form-label text-md-right col-4">

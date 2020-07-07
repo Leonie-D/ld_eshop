@@ -92,7 +92,7 @@
                                     </div>
                                     <div class="new-address mt-3">
                                         <div class="form-group row">
-                                            <label for="name"
+                                            <label for="addressName"
                                                    class="ol-form-label text-md-right pl-0 col-4">{{ __('Address name') }}</label>
                                             <div class="col-8">
                                                 <input id="addressName"
