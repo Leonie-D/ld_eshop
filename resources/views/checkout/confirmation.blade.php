@@ -29,4 +29,9 @@
             </div>
         </div>
     @endif
+
+    <div class="row justify-content-center mt-5">
+        <a class="btn btn-primary" href={{route('home')}}>{{__("Back to MaNats' home")}}</a>
+    </div>
+
 @endsection

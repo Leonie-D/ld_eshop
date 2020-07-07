@@ -21,5 +21,8 @@
             <h3 class="col-12">{{__('To come and see us')}}</h3>
             <p class="col-12">{{__('Find our shop at')}} 35 rue Neuve, 59000 Lille</p>
         </div>
+        <div class="row justify-content-center mb-4">
+            <a class="btn btn-primary" href={{route('home')}}>{{__("Back to MaNats' home")}}</a>
+        </div>
     </div>
 @endsection

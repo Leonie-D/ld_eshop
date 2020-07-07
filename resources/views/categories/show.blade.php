@@ -6,7 +6,16 @@
 
 <div class="container">
     <div class="row justify-content-center">
-        <h1 class="col-12 text-center"> {{ __($category->name) }} </h1>
+        <div class="col-12 d-flex justify-content-between align-items-baseline">
+            <a href={{route('category.show', ['category' => $previousCategory])}}>
+                &larr; {{$previousCategory->name}}
+            </a>
+            <h1 class="text-center"> {{ __($category->name) }} </h1>
+            <a href={{route('category.show', ['category' => $nextCategory])}}>
+                {{$nextCategory->name}} &rarr;
+            </a>
+        </div>
+
         <ul class="row list-unstyled">
             @foreach($category->products as $product)
                 @php

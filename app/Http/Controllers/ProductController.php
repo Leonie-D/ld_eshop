@@ -50,7 +50,17 @@ class ProductController extends Controller
      */
     public function show(Product $product)
     {
-        return view('products.show', compact('product'));
+        $previousProduct = Product::where('id', '<', $product->id)->orderBy('id', 'desc')->first();
+        if ($previousProduct === null) {
+            $previousProduct = Product::orderBy('id', 'desc')->first();
+        }
+
+        $nextProduct = Product::where('id', '>', $product->id)->orderBy('id', 'asc')->first();
+        if ($nextProduct === null) {
+            $nextProduct = Product::orderBy('id', 'asc')->first();
+        }
+
+        return view('products.show', compact('product', 'previousProduct', 'nextProduct'));
     }
 
     /**

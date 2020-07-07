@@ -48,7 +48,17 @@ class CategoryController extends Controller
      */
     public function show(Category $category)
     {
-        return view('categories.show', compact('category'));
+        $previousCategory = Category::where('id', '<', $category->id)->orderBy('id', 'desc')->first();
+        if ($previousCategory === null) {
+            $previousCategory = Category::orderBy('id', 'desc')->first();
+        }
+
+        $nextCategory = Category::where('id', '>', $category->id)->orderBy('id', 'asc')->first();
+        if ($nextCategory === null) {
+            $nextCategory = Category::orderBy('id', 'asc')->first();
+        }
+
+        return view('categories.show', compact('category', 'previousCategory', 'nextCategory'));
     }
 
     /**
