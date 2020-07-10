@@ -3,6 +3,7 @@
 namespace App\Exceptions;
 
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Symfony\Component\HttpKernel\Exception\MethodNotAllowedHttpException;
 use Throwable;
 
 class Handler extends ExceptionHandler
@@ -55,6 +56,8 @@ class Handler extends ExceptionHandler
                 return response()->view('errors.404', [], 404);
 		    } else if($exception->getStatusCode() === 403) {
                 return response()->view('errors.403', [], 403);
+            } else if($exception instanceof MethodNotAllowedHttpException) {
+                return response()->view('errors.404', [], 404);
             }
         }
         return parent::render($request, $exception);

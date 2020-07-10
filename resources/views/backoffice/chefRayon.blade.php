@@ -20,7 +20,7 @@
                             <ul>
                                 @foreach($notifications as $notification)
                                     <li>
-                                        {{$notification->data['product_name']}} {{$notification->data['color_name']}}
+                                        {{$notification->data['product_name']}} {{__($notification->data['color_name'])}}
                                     </li>
                                 @endforeach
                             </ul>

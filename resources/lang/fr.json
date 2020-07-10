@@ -139,5 +139,7 @@
     "Edit shipping address" : "Modifier l'adresse de livraison",
     "Add shipping address" : "Ajouter une adresse de livraison",
     "See previous product" : "Voir le produit précédent",
-    "See next product" : "Voir le produit suivant"
+    "See next product" : "Voir le produit suivant",
+    "Not yet" : "Un peu de patience",
+    "Please add items to your cart before asking for checkout" : "Veuillez ajouter des articles afin de finaliser la commande"
 }

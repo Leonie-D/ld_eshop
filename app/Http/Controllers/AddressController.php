@@ -86,7 +86,12 @@ class AddressController extends Controller
     {
         $user = User::findOrFail($userId);
 
-        if($user == auth()->user() || $user->admin) {
+        $liste = [];
+        foreach($user->addresses as $a) {
+            $liste[] = $a->id;
+        }
+
+        if(($userId == auth()->user()->id || auth()->user()->admin) && in_array($address->id, $liste, TRUE)) {
             $addressName = Address_user::where([
                 ['user_id', '=', $userId],
                 ['address_id', '=', $address->id]
@@ -107,8 +112,14 @@ class AddressController extends Controller
      */
     public function update(AddressFormRequest $request, int $userId, Address $address)
     {
+        $user = User::findOrFail($userId);
 
-        if( auth()->user()->id === $userId || auth()->user()->admin) {
+        $liste = [];
+        foreach($user->addresses as $a) {
+            $liste[] = $a->id;
+        }
+
+        if( (auth()->user()->id == $userId || auth()->user()->admin) && in_array($address->id, $liste, TRUE)) {
 
             if(isset($request->number) && isset($request->roadName) && isset($request->zip) && isset($request->city)) {
                 $address->number = $request->number;
@@ -147,7 +158,14 @@ class AddressController extends Controller
      */
     public function destroy(int $userId, Address $address)
     {
-        if($userId == auth()->user()->id || auth()->user()->admin) {
+        $user = User::findOrFail($userId);
+
+        $liste = [];
+        foreach($user->addresses as $a) {
+            $liste[] = $a->id;
+        }
+
+        if(($userId == auth()->user()->id || auth()->user()->admin) && in_array($address->id, $liste, TRUE)) {
             // théoriquement, suffisant de supprimer uniquement l'association user/address car l'address en tant que telle peut être utilisée par un autre utilisateur (pas dans mon cas... car je crée une nouvelle address même si identique à une déjà en base...)
             Address_user::where([
                 ['address_id', '=', $address->id],

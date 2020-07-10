@@ -133,6 +133,10 @@ class PanierController extends Controller
     }
 
     public function authenticate() {
-        return view('panier.authenticate');
+        if(\Cart::getContent()->count() > 0) {
+            return view('panier.authenticate');
+        } else {
+            return redirect()->back();
+        }
     }
 }

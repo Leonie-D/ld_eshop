@@ -17,20 +17,26 @@ class OrderController extends Controller
 
     public function show(Order $order)
     {
-        // reconstitution du panier détaillé
-        foreach($order->products as $item){
-            $color =  Color::find($item->pivot->color_id);
 
-            $panier[] = [
-                "itemName" => $item->name,
-                "itemColor" => $color->name,
-                "itemPicture" => Color_product::where([['product_id', $item->id],['color_id', $color->id]])->first()->picture,
-                "itemPrice" => $item->priceTtc(),
-                "itemQuantity" => $item->pivot->quantity,
-            ];
+        if(auth()->user()->admin || auth()->user()->id === $order->user_id)
+        {
+            // reconstitution du panier détaillé
+            foreach($order->products as $item){
+                $color =  Color::find($item->pivot->color_id);
+
+                $panier[] = [
+                    "itemName" => $item->name,
+                    "itemColor" => $color->name,
+                    "itemPicture" => Color_product::where([['product_id', $item->id],['color_id', $color->id]])->first()->picture,
+                    "itemPrice" => $item->priceTtc(),
+                    "itemQuantity" => $item->pivot->quantity,
+                ];
+            }
+
+            return view('orders.show', compact('order', 'panier'));
+        } else {
+            return redirect()->back();
         }
-
-        return view('orders.show', compact('order', 'panier'));
     }
 
     public function update(Request $request, Order $order)

@@ -19,7 +19,27 @@ use Storage;
 class CheckoutController extends Controller
 {
     public function checkout(Address $deliveryAddress = null) {
-        return view('checkout.index', compact('deliveryAddress'));
+
+        if(\Cart::getContent()->count() === 0) {
+            return redirect()->back();
+        }
+
+        if($deliveryAddress === null) {
+            return view('checkout.index', compact('deliveryAddress'));
+        }
+
+        if(isset($deliveryAddress)) {
+            $liste = [];
+            foreach(auth()->user()->addresses as $address) {
+                $liste[] = $address->id;
+            }
+
+            if(in_array($deliveryAddress->id, $liste, TRUE)) {
+                return view('checkout.index', compact('deliveryAddress'));
+            } else {
+                return redirect()->back();
+            }
+        }
     }
 
     public function store(Request $request, Address $deliveryAddress = null) {
@@ -105,10 +125,6 @@ class CheckoutController extends Controller
             $error = $e->getMessage();
         }
 
-        return redirect()->route('checkout.confirm', ['error' => $error]);
-    }
-
-    public function confirm(string $error = null) {
         return view('checkout.confirmation', compact('error'));
     }
 }

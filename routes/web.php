@@ -38,10 +38,12 @@ Route::group(['middleware' => ['language']], function() {
     // contact
     Route::get('/contact', 'WelcomeController@contact')->name('contact');
 
-    // routes liés aux produits // ATTENTION : certaines méthodes accessibles uniquement pour admin et/ou chef de rayon
+    // routes liés aux produits
+    // certaines méthodes accessibles uniquement pour les chefs de rayon (voir plus bas)
     Route::resource('/product', 'ProductController')->only(['index', 'show']);
 
-    // routes liés aux catégories // ATTENTION : certaines méthodes accessibles uniquement pour admin et/ou chef de rayon
+    // routes liés aux catégories
+    // certaines méthodes accessibles uniquement pour les chefs de rayon (voir plus bas)
     Route::resource('/category', 'CategoryController')->only(['index', 'show']);
 
     // routes liées au panier
@@ -59,13 +61,12 @@ Route::group(['middleware' => ['language']], function() {
         // Visualisation et édition de profil
         // ATTENTION : certaines méthodes accessibles uniquement pour admin
         Route::resource('/user', 'UserController')->except(['index','create']);
-        Route::resource('/{user}/address', 'AddressController')->except(['index, create, show']);
+        Route::resource('/{user}/address', 'AddressController')->except(['index', 'create', 'show']);
         Route::get('/order/{order}', 'OrderController@show')->name('order.show');
 
         // payement
-        Route::get('/chekout/{deliveryAddress?}', 'CheckoutController@checkout')->name('checkout');
-        Route::post('/chekout/store/{deliveryAddress?}', 'CheckoutController@store')->name('checkout.store');
-        Route::get('/checkout/confirm/{error?}', 'CheckoutController@confirm')->name('checkout.confirm');
+        Route::get('/checkout/{deliveryAddress?}', 'CheckoutController@checkout')->name('checkout');
+        Route::post('/checkout/store/{deliveryAddress?}', 'CheckoutController@store')->name('checkout.store');
         Route::post('/select/{user}/address', 'AddressController@select')->name('address.select');
 
         // backoffice admin
